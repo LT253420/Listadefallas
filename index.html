@@ -1,0 +1,352 @@
+<!-- HTML ACTUALIZADO SOLO CON LAS MODIFICACIONES QUE MENCIONASTE -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Fallas y Soluciones</title>
+  <style>
+    html { overflow: hidden; }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #262626;
+      font-family: 'Consolas', 'Courier New', monospace;
+      color: #00ff00;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-shadow: 0 0 8px #00ff00;
+      z-index: 1;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ffffff;
+      margin-top: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+      z-index: 1;
+    }
+
+    button {
+      background: transparent;
+      border: 2px solid #00ff00;
+      color: #00ff68;
+      font-size: 1rem;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px #00ff0055;
+    }
+
+    button:hover {
+      background-color: #00ff68;
+      color: #222222;
+      box-shadow: 0 0 15px #00ff00;
+    }
+
+    .response-box {
+      margin-top: 20px;
+      font-size: 1.05rem;
+      text-align: center;
+      color: #ffffffcc;
+      padding: 10px;
+      z-index: 1;
+    }
+
+    #preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 300px;
+      height: 50px;
+      position: relative;
+    }
+
+    .percentage {
+      position: absolute;
+      top: -30px;
+      left: 0;
+      font-size: 1.2rem;
+      color: #00ff68;
+      text-shadow: 0 0 8px #00ff68;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      border: 2px solid #00ff68;
+      box-shadow: 0 0 10px #00ff68;
+      background: rgba(0, 255, 104, 0.1);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #00ff68;
+      width: 0%;
+      transition: width 0.2s ease-out;
+      box-shadow: 0 0 10px #00ff68;
+    }
+
+    .flash {
+      animation: flash 0.3s ease-in-out 2;
+    }
+
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 60px;
+      text-align: center;
+      color: #3d3b3b;
+      font-size: 0.9rem;
+      z-index: 1;
+    }
+
+    .footer img {
+      max-height: 50px;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      button { font-size: 0.95rem; padding: 10px; }
+      .footer { bottom: 50px; }
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 55px;
+      height: 55px;
+      border: 2px solid #00ff00;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00ff0055;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .back-button svg {
+      fill: #00ff00;
+      width: 24px;
+      height: 24px;
+      transition: fill 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #00ff68;
+      box-shadow: 0 0 15px #00ff00;
+    }
+
+    .back-button:hover svg {
+      fill: #222222;
+    }
+  </style>
+</head>
+
+<body style="background-image: PEGA_TU_IMAGEN_AQUÍ;">
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loading-container">
+      <div class="percentage" id="percentage">0%</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Título -->
+  <h1>Lista de Fallas y Soluciones</h1>
+
+  <!-- Menú principal -->
+  <div class="button-container" id="mainMenu">
+    <button onclick="mostrarComoUsar()">Cómo usar</button>
+    <button onclick="mostrarFallas()">Inicio - Ver fallas</button>
+  </div>
+
+  <!-- Guía de uso -->
+  <div class="button-container" id="usoMenu" style="display:none;">
+    <button onclick="volverA('main')">← Volver</button>
+    <div class="response-box">Guía de cómo utilizar la lista de fallas</div>
+  </div>
+
+  <!-- Lista de fallas -->
+  <div class="button-container" id="fallasMenu" style="display:none;">
+    <button onclick="showResponse('No enciende')">No enciende</button>
+    <button onclick="showResponse('No tiene sonido')">No tiene sonido</button>
+    <button onclick="showResponse('No puedo hacer llamadas')">No puedo hacer llamadas</button>
+    <button onclick="showResponse('El teléfono se calienta')">El teléfono se calienta</button>
+  </div>
+
+  <!-- Subopciones -->
+  <div class="button-container" id="respuestas" style="display:none;"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <img src="PEGA_TU_IMAGEN_AQUÍ" alt="Logo" />
+    <div>Powered by Novacell Repairs</div>
+    <div>By Lucas M. Tuillier</div>
+  </div>
+
+  <!-- Botón home -->
+  <button id="backBtn" class="back-button" onclick="goToHome()">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+
+  <!-- Scripts -->
+  <script>
+    const mainMenu = document.getElementById("mainMenu");
+    const usoMenu = document.getElementById("usoMenu");
+    const fallasMenu = document.getElementById("fallasMenu");
+    const respuestas = document.getElementById("respuestas");
+    const backBtn = document.getElementById("backBtn");
+
+    const respuestasPorFalla = {
+      "No enciende": [
+        ["Revisar batería", "Medir batería para saber si funciona."],
+        ["Botón de encendido", "Verificar si el botón funciona correctamente."],
+        ["Placa base", "Posible falla de alimentación o cortocircuito."]
+      ],
+      "No tiene sonido": [
+        ["Altavoz", "Probar el parlante con otro equipo."],
+        ["Conectores", "Verificar si están sulfatados o desconectados."],
+        ["Placa base", "Fallo en circuito de audio."]
+      ],
+      "No puedo hacer llamadas": [
+        ["Estado del IMEI", "Verificar si el equipo fue dado de baja."],
+        ["Chip", "Probar con otro chip o limpiar la bandeja."],
+        ["Señal", "Revisar si toma señal correctamente."]
+      ],
+      "El teléfono se calienta": [
+        ["Batería", "Puede estar defectuosa o vieja."],
+        ["Apps en segundo plano", "Cerrar procesos que usen muchos recursos."],
+        ["Mantenimiento", "Limpiar placa, cambiar pasta térmica."]
+      ]
+    };
+
+    function mostrarComoUsar() {
+      mainMenu.style.display = "none";
+      usoMenu.style.display = "flex";
+      backBtn.style.display = "flex";
+    }
+
+    function mostrarFallas() {
+      mainMenu.style.display = "none";
+      fallasMenu.style.display = "flex";
+      backBtn.style.display = "flex";
+    }
+
+    function volverA(destino) {
+      if (destino === "main") {
+        usoMenu.style.display = "none";
+        fallasMenu.style.display = "none";
+        respuestas.style.display = "none";
+        respuestas.innerHTML = "";
+        mainMenu.style.display = "flex";
+        backBtn.style.display = "none";
+      } else if (destino === "fallas") {
+        respuestas.style.display = "none";
+        respuestas.innerHTML = "";
+        fallasMenu.style.display = "flex";
+      }
+    }
+
+    function showResponse(falla) {
+      fallasMenu.style.display = "none";
+      respuestas.style.display = "flex";
+      respuestas.innerHTML = `<button onclick="volverA('fallas')">← Volver</button><h2>${falla}</h2>`;
+      respuestasPorFalla[falla].forEach(([titulo, descripcion]) => {
+        const btn = document.createElement("button");
+        btn.textContent = titulo;
+        btn.onclick = () => {
+          document.querySelectorAll(".response-box").forEach(e => e.remove());
+          const box = document.createElement("div");
+          box.className = "response-box";
+          box.innerHTML = `➡ ${descripcion}`;
+          respuestas.appendChild(box);
+        };
+        respuestas.appendChild(btn);
+      });
+    }
+
+    function goToHome() {
+      volverA('main');
+    }
+
+    // Preloader
+    const fill = document.getElementById("progressFill");
+    const percentText = document.getElementById("percentage");
+    const preloader = document.getElementById("preloader");
+
+    const smoothProgress = [1, 4, 7, 11, 16, 21, 27, 33, 38, 44, 50, 57, 63, 68, 74, 79, 83, 88, 93, 97, 100];
+    let index = 0;
+
+    function updateProgress() {
+      if (index < smoothProgress.length) {
+        const value = smoothProgress[index];
+        fill.style.width = value + "%";
+        percentText.textContent = value + "%";
+        index++;
+        setTimeout(updateProgress, 150);
+      } else {
+        percentText.classList.add("flash");
+        fill.classList.add("flash");
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 800);
+      }
+    }
+
+    window.onload = () => {
+      setTimeout(updateProgress, 300);
+    };
+  </script>
+</body>
+</html>
