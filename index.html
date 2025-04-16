@@ -61,24 +61,31 @@
     window.logout = logout;
 
     // Animación barra de carga
-    function startPreloader(callback) {
-      const fill = document.getElementById("progressFill");
-      const percentText = document.getElementById("percentage");
-      const smoothProgress = [1, 4, 7, 11, 16, 21, 27, 33, 38, 44, 50, 57, 63, 68, 74, 79, 83, 88, 93, 97, 100];
-      let index = 0;
+  function startPreloader(callback) {
+  const fill = document.getElementById("progressFill");
+  const percentText = document.getElementById("percentage");
+  const smoothProgress = [1, 4, 7, 11, 16, 21, 27, 33, 38, 44, 50, 57, 63, 68, 74, 79, 83, 88, 93, 97, 100];
+  let index = 0;
 
-      function updateProgress() {
-        if (index < smoothProgress.length) {
-          const value = smoothProgress[index];
-          fill.style.width = value + "%";
-          percentText.textContent = value + "%";
-          index++;
-          setTimeout(updateProgress, 150);
-        } else {
-          percentText.classList.add("flash");
-          fill.classList.add("flash");
-          setTimeout(callback, 800);
-        }
+  function updateProgress() {
+    if (index < smoothProgress.length) {
+      const value = smoothProgress[index];
+      fill.style.width = value + "%";
+      percentText.textContent = value + "%";
+      index++;
+      setTimeout(updateProgress, 150);
+    } else {
+      setTimeout(() => {
+        percentText.classList.add("flash");
+        fill.classList.add("flash");
+        setTimeout(callback, 600); // inicia después del parpadeo
+      }, 200);
+    }
+  }
+
+  updateProgress();
+}
+
       }
 
       updateProgress();
@@ -147,6 +154,11 @@
       z-index: 1;
     }
 
+.response-box.justificado {
+  text-align: justify;
+}
+
+    
     .footer {
       position: absolute;
       bottom: 60px;
@@ -316,7 +328,7 @@
 
     <div class="button-container" id="usoMenu" style="display:none;">
       <button onclick="volverA('main')">← Volver</button>
-      <div class="response-box">
+     <div class="response-box justificado">
         La lista está hecha de forma simple: le das a inicio, y seleccionás de toda la lista la falla que ves en tu equipo. Te van a salir las posibles fallas de un equipo para que las revises. Tocás en una, y te aparece un texto acerca de sus posibles soluciones. <br><br>
         Recordá que un componente dañado se cambia por uno nuevo, un componente desconectado se vuelve a conectar, un componente faltante se coloca, un componente o zona sucia o sulfatada se limpia. Y si dos o más componentes funcionan, el problema está en la conexión entre ambos (FPC).<br><br>
         En muchos casos, la lista te indicará dónde deberías revisar o el componente que podría generar la falla. Está en el técnico decidir qué hacer ;)
