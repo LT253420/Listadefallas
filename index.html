@@ -4,6 +4,87 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lista de Fallas y Soluciones</title>
+
+  <!-- Firebase Auth + Animación + Acceso con Google -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBt6OlcaDWbhx-ldI4l0a4kDPu8U1dm48c",
+      authDomain: "login-de-lista-de-fallas.firebaseapp.com",
+      projectId: "login-de-lista-de-fallas",
+      storageBucket: "login-de-lista-de-fallas.firebasestorage.app",
+      messagingSenderId: "632649294661",
+      appId: "1:632649294661:web:9c6daa894931936c87142c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+
+    function login() {
+      signInWithPopup(auth, provider)
+        .then(result => console.log("Logueado como:", result.user.displayName))
+        .catch(error => alert("Error al iniciar sesión: " + error.message));
+    }
+
+    function logout() {
+      signOut(auth);
+    }
+
+    onAuthStateChanged(auth, user => {
+      const loginContainer = document.getElementById("loginContainer");
+      const appContent = document.getElementById("appContent");
+      const emailText = document.getElementById("emailText");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const preloader = document.getElementById("preloader");
+
+      if (user) {
+        loginContainer.style.display = "none";
+        preloader.style.display = "flex";
+        startPreloader(() => {
+          appContent.style.display = "flex";
+          emailText.textContent = user.email;
+          logoutBtn.style.display = "inline-block";
+          preloader.style.display = "none";
+        });
+      } else {
+        loginContainer.style.display = "flex";
+        appContent.style.display = "none";
+        logoutBtn.style.display = "none";
+        emailText.textContent = "";
+      }
+    });
+
+    window.login = login;
+    window.logout = logout;
+
+    // Animación barra de carga
+    function startPreloader(callback) {
+      const fill = document.getElementById("progressFill");
+      const percentText = document.getElementById("percentage");
+      const smoothProgress = [1, 4, 7, 11, 16, 21, 27, 33, 38, 44, 50, 57, 63, 68, 74, 79, 83, 88, 93, 97, 100];
+      let index = 0;
+
+      function updateProgress() {
+        if (index < smoothProgress.length) {
+          const value = smoothProgress[index];
+          fill.style.width = value + "%";
+          percentText.textContent = value + "%";
+          index++;
+          setTimeout(updateProgress, 150);
+        } else {
+          percentText.classList.add("flash");
+          fill.classList.add("flash");
+          setTimeout(callback, 800);
+        }
+      }
+
+      updateProgress();
+    }
+  </script>
+
   <style>
     html { overflow: hidden; }
 
@@ -20,78 +101,15 @@
       height: 100vh;
       overflow-x: hidden;
       position: relative;
+      background-image: PEGA TU IMAGEN ACÁ;
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-position: center;
-      background-image: PEGA_TU_IMAGEN_ACÁ;
     }
 
-    #login-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      gap: 20px;
-    }
-
-    #loginBtn {
-      background: transparent;
-      border: 2px solid #00ff00;
-      color: #00ff68;
-      font-size: 1rem;
-      padding: 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 8px #00ff0055;
-    }
-
-    #loginBtn:hover {
-      background-color: #00ff68;
-      color: #222222;
-      box-shadow: 0 0 15px #00ff00;
-    }
-
-    #logoutBtn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 8px 12px;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      background: transparent;
-      color: #00ff00;
-      border: 1px solid #00ff00;
-      cursor: pointer;
-    }
-
-    #logoutBtn:hover {
-      background: #00ff68;
-      color: #222;
-    }
-
-    #userEmail {
-      position: absolute;
-      top: 24px;
-      right: 150px;
-      color: #00ff68;
-      font-size: 0.85rem;
-    }
-
-    #appContent {
-      display: none;
-      width: 100%;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 30px;
-      text-shadow: 0 0 8px #00ff00;
-      z-index: 1;
-    }
+    h1 { text-align: center; font-size: 2rem; margin-bottom: 30px; text-shadow: 0 0 8px #00ff00; z-index: 1; }
+    h2 { text-align: center; color: #ffffff; margin-top: 20px; }
 
     .button-container {
       display: flex;
@@ -100,7 +118,6 @@
       width: 100%;
       max-width: 400px;
       z-index: 1;
-      margin: auto;
     }
 
     button {
@@ -170,12 +187,35 @@
       transition: fill 0.3s ease;
     }
 
-    .back-button:hover {
-      background-color: #00ff68;
+    .back-button:hover { background-color: #00ff68; }
+    .back-button:hover svg { fill: #222222; }
+
+    .top-bar {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #00ff68;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 1000;
     }
 
-    .back-button:hover svg {
-      fill: #222222;
+    #logoutBtn {
+      background: transparent;
+      color: #00ff68;
+      border: 2px solid #00ff00;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #loginContainer {
+      margin-top: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     #preloader {
@@ -185,6 +225,7 @@
       width: 100%;
       height: 100%;
       background-color: #1a1a1a;
+      display: flex;
       justify-content: center;
       align-items: center;
       z-index: 9999;
@@ -243,10 +284,11 @@
 </head>
 
 <body>
+
   <!-- LOGIN -->
-  <div id="login-section">
-    <h1>Acceder con Google</h1>
-    <button id="loginBtn">Iniciar sesión con Google</button>
+  <div id="loginContainer">
+    <h1>Lista de Fallas y Soluciones</h1>
+    <button onclick="login()">Acceder con Google</button>
   </div>
 
   <!-- PRELOADER -->
@@ -257,103 +299,120 @@
     </div>
   </div>
 
-  <!-- APP -->
-  <div id="appContent">
-    <span id="userEmail"></span>
-    <button id="logoutBtn">Cerrar sesión</button>
+  <!-- Barra superior -->
+  <div class="top-bar">
+    <span id="emailText"></span>
+    <button id="logoutBtn" onclick="logout()" style="display:none;">Cerrar sesión</button>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div id="appContent" style="display:none; flex-direction: column; align-items: center; width: 100%;">
     <h1>Lista de Fallas y Soluciones</h1>
 
-    <!-- Cómo usar -->
-    <div class="button-container">
+    <div class="button-container" id="mainMenu">
+      <button onclick="mostrarComoUsar()">Cómo usar</button>
+      <button onclick="mostrarFallas()">Inicio - Ver fallas</button>
+    </div>
+
+    <div class="button-container" id="usoMenu" style="display:none;">
+      <button onclick="volverA('main')">← Volver</button>
       <div class="response-box">
         La lista está hecha de forma simple: le das a inicio, y seleccionás de toda la lista la falla que ves en tu equipo. Te van a salir las posibles fallas de un equipo para que las revises. Tocás en una, y te aparece un texto acerca de sus posibles soluciones. <br><br>
-        Recordá que un componente dañado se cambia por uno nuevo, un componente desconectado se vuelve a conectar, un componente faltante se coloca, un componente o zona sucia o sulfatada se limpia. Y si dos o más componentes funcionan, el problema está en la conexión entre ambos. Es decir, FPC. <br><br>
-        En muchos casos, la lista te indicará dónde deberías revisar o el componente que podría generar la falla. Está en el técnico decidir qué hacer 😉
+        Recordá que un componente dañado se cambia por uno nuevo, un componente desconectado se vuelve a conectar, un componente faltante se coloca, un componente o zona sucia o sulfatada se limpia. Y si dos o más componentes funcionan, el problema está en la conexión entre ambos (FPC).<br><br>
+        En muchos casos, la lista te indicará dónde deberías revisar o el componente que podría generar la falla. Está en el técnico decidir qué hacer ;)
       </div>
     </div>
 
-    <!-- FOOTER -->
+    <div class="button-container" id="fallasMenu" style="display:none;">
+      <button onclick="showResponse('No enciende')">No enciende</button>
+      <button onclick="showResponse('No tiene sonido')">No tiene sonido</button>
+      <button onclick="showResponse('No puedo hacer llamadas')">No puedo hacer llamadas</button>
+      <button onclick="showResponse('El teléfono se calienta')">El teléfono se calienta</button>
+    </div>
+
+    <div class="button-container" id="respuestas" style="display:none;"></div>
+
+    <!-- Botón Home -->
+    <button id="backBtn" class="back-button" onclick="goToHome()">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </button>
+
+    <!-- Footer -->
     <div class="footer">
-      <img src="PEGA_TU_IMAGEN_ACÁ" alt="Logo">
+      <img src="PEGA TU IMAGEN ACÁ">
       <div>Powered by Novacell Repairs</div>
       <div>By Lucas M. Tuillier</div>
     </div>
-
-    <!-- BOTÓN HOME -->
-    <button id="homeBtn" class="back-button">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    </button>
   </div>
 
-  <!-- FIREBASE -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBt6OlcaDWbhx-ldI4l0a4kDPu8U1dm48c",
-      authDomain: "login-de-lista-de-fallas.firebaseapp.com",
-      projectId: "login-de-lista-de-fallas",
-      storageBucket: "login-de-lista-de-fallas.firebasestorage.app",
-      messagingSenderId: "632649294661",
-      appId: "1:632649294661:web:9c6daa894931936c87142c"
+  <script>
+    const respuestasPorFalla = {
+      "No enciende": [
+        ["Revisar batería", "Medir batería para saber si funciona."],
+        ["Botón de encendido", "Verificar si el botón funciona correctamente."],
+        ["Placa base", "Posible falla de alimentación o cortocircuito."]
+      ],
+      "No tiene sonido": [
+        ["Altavoz", "Probar el parlante con otro equipo."],
+        ["Conectores", "Verificar si están sulfatados o desconectados."],
+        ["Placa base", "Fallo en circuito de audio."]
+      ],
+      "No puedo hacer llamadas": [
+        ["Estado del IMEI", "Verificar si el equipo fue dado de baja."],
+        ["Chip", "Probar con otro chip o limpiar la bandeja."],
+        ["Señal", "Revisar si toma señal correctamente."]
+      ],
+      "El teléfono se calienta": [
+        ["Batería", "Puede estar defectuosa o vieja."],
+        ["Apps en segundo plano", "Cerrar procesos que usen muchos recursos."],
+        ["Mantenimiento", "Limpiar placa, cambiar pasta térmica."]
+      ]
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
+    function mostrarComoUsar() {
+      ocultarTodo();
+      usoMenu.style.display = "flex";
+    }
 
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const appContent = document.getElementById("appContent");
-    const loginSection = document.getElementById("login-section");
-    const userEmail = document.getElementById("userEmail");
-    const preloader = document.getElementById("preloader");
+    function mostrarFallas() {
+      ocultarTodo();
+      fallasMenu.style.display = "flex";
+    }
 
-    loginBtn.addEventListener("click", () => {
-      signInWithPopup(auth, provider).catch(console.error);
-    });
+    function ocultarTodo() {
+      mainMenu.style.display = "none";
+      usoMenu.style.display = "none";
+      fallasMenu.style.display = "none";
+      respuestas.style.display = "none";
+      respuestas.innerHTML = "";
+    }
 
-    logoutBtn.addEventListener("click", () => {
-      signOut(auth);
-    });
+    function volverA(seccion) {
+      ocultarTodo();
+      if (seccion === "main") mainMenu.style.display = "flex";
+      else if (seccion === "fallas") fallasMenu.style.display = "flex";
+    }
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        userEmail.textContent = user.email;
-        loginSection.style.display = "none";
-        preloader.style.display = "flex";
-        startPreloader(() => {
-          appContent.style.display = "block";
-          preloader.style.display = "none";
-        });
-      } else {
-        appContent.style.display = "none";
-        loginSection.style.display = "flex";
-      }
-    });
+    function showResponse(falla) {
+      ocultarTodo();
+      respuestas.style.display = "flex";
+      respuestas.innerHTML = `<button onclick="volverA('fallas')">← Volver</button><h2>${falla}</h2>`;
+      respuestasPorFalla[falla].forEach(([titulo, descripcion]) => {
+        const btn = document.createElement("button");
+        btn.textContent = titulo;
+        btn.onclick = () => {
+          document.querySelectorAll(".response-box").forEach(e => e.remove());
+          const box = document.createElement("div");
+          box.className = "response-box";
+          box.innerHTML = `➡ ${descripcion}`;
+          respuestas.appendChild(box);
+        };
+        respuestas.appendChild(btn);
+      });
+    }
 
-    function startPreloader(callback) {
-      const fill = document.getElementById("progressFill");
-      const percentText = document.getElementById("percentage");
-      const smoothProgress = [1, 4, 7, 11, 16, 21, 27, 33, 38, 44, 50, 57, 63, 68, 74, 79, 83, 88, 93, 97, 100];
-      let index = 0;
-
-      function updateProgress() {
-        if (index < smoothProgress.length) {
-          const value = smoothProgress[index];
-          fill.style.width = value + "%";
-          percentText.textContent = value + "%";
-          index++;
-          setTimeout(updateProgress, 150);
-        } else {
-          percentText.classList.add("flash");
-          fill.classList.add("flash");
-          setTimeout(callback, 800);
-        }
-      }
-
-      updateProgress();
+    function goToHome() {
+      volverA("main");
     }
   </script>
 </body>
