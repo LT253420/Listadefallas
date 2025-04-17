@@ -337,6 +337,12 @@
       <button onclick="showResponse('No puedo hacer llamadas')">No puedo hacer llamadas</button>
       <button onclick="showResponse('El teléfono se calienta')">El teléfono se calienta</button>
       <button onclick="showResponse('Mi celular se apaga solo')">Mi celular se apaga solo</button>
+      <button onclick="showResponse('Mi celular se reinicia solo')">Mi celular se reinicia solo</button>
+      <button onclick="showResponse('La pantalla no prende pero el celular funciona')">La pantalla no prende pero el celular funciona</button>
+      <button onclick="showResponse('La pantalla queda en blanco / tiene interferencia')">La pantalla queda en blanco / tiene interferencia</button>
+      <button onclick="showResponse('La pantalla parpadea')">La pantalla parpadea</button>
+      <button onclick="showResponse('Mi celular se apaga cuando llaman')">Mi celular se apaga cuando llaman</button>
+      <button onclick="showResponse('La pantalla se apaga cuando escucho un audio o me llaman')">La pantalla se apaga cuando escucho un audio o me llaman</button>
     </div>
 
     <div class="button-container" id="respuestas" style="display:none;"></div>
@@ -380,6 +386,51 @@
       "Mi celular se apaga solo": [
         ["Boton de encendido", "Puede estar en corto o dañado"],
         ["Batería", "Conector de batería dañado o batería en mal estado"],
+        ["Placa Madre", "Cortocircuito o placa dañada"]
+      ],
+      
+      "Mi celular se reinicia solo": [
+        ["Boton de encendido", "Puede estar en corto o dañado"],
+        ["Batería", "Conector de batería dañado o batería en mal estado"],
+        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
+        ["Placa Madre", "Cortocircuito o placa dañada"]
+      ],
+      
+      "La pantalla no prende pero el celular funciona": [
+        ["Módulo / display / pantalla", "Puede tener la pantalla dañada"],
+        ["Conector del Módulo / display / pantalla", "Conector de módulo dañado, mal conectado o desconectado"],
+        ["Placa Madre", "daños internos en la placa"]
+      ],
+        
+      
+      "La pantalla queda en blanco / tiene interferencia": [
+        ["Módulo / display / pantalla", "Puede estar en corto o dañado"],
+        ["Batería", "Conector de batería dañado o batería en mal estado"],
+        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
+        ["Placa Madre", "Cortocircuito o placa dañada"]
+      ],
+        
+      
+      "La pantalla parpadea": [
+        ["Boton de encendido", "Puede tener la pantalla dañada"],
+        ["Fallas de Software", "Fallas en el sistema que producen ese error"],
+        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
+        ["Placa Madre", "Daños internos en la placa"]
+      ],
+          
+      
+      "Mi celular se apaga cuando llaman": [
+        ["Antena coaxial", "Puede estar en corto o dañada"],
+        ["Software", "Fallas en el sistema que producen ese error"],
+        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
+        ["Placa Madre", "Cortocircuito o placa dañada"]
+      ],
+          
+      
+      "La pantalla se apaga cuando escucho un audio o me llaman": [
+        ["Sensores", "Pueden estar en corto o dañado"],
+        ["Mal cambio de pantalla", "Una pantalla o módulo mal Colocado puede tapar los sensores y generar esos errores"],
+        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
         ["Placa Madre", "Cortocircuito o placa dañada"]
       ]
     };
