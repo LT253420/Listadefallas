@@ -78,75 +78,77 @@
       margin-bottom: 10px;
     }
 
-    /* ANIMACIÓN DE CARGA ORIGINAL */
-    #preloader {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #1a1a1a;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
+    /* === ANIMACIÓN DE CARGA INICIAL === */
+#preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
 
-    .loading-container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 300px;
-      height: 50px;
-      position: relative;
-    }
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  height: 50px;
+  position: relative;
+}
 
-    .percentage {
-      position: absolute;
-      top: -30px;
-      left: 0;
-      font-size: 1.2rem;
-      color: #00ff68;
-      text-shadow: 0 0 8px #00ff68;
-    }
+.percentage {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  font-size: 1.2rem;
+  color: #00ff68;
+  text-shadow: 0 0 8px #00ff68;
+}
 
-    .progress-bar {
-      width: 100%;
-      height: 12px;
-      border: 2px solid #00ff68;
-      box-shadow: 0 0 10px #00ff68;
-      background: rgba(0, 255, 104, 0.1);
-      overflow: hidden;
-    }
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  border: 2px solid #00ff68;
+  box-shadow: 0 0 10px #00ff68;
+  background: rgba(0, 255, 104, 0.1);
+  overflow: hidden;
+}
 
-    .progress-fill {
-      height: 100%;
-      background: #00ff68;
-      width: 0%;
-      transition: width 0.2s ease-out;
-      box-shadow: 0 0 10px #00ff68;
-    }
+.progress-fill {
+  height: 100%;
+  background: #00ff68;
+  width: 0%;
+  transition: width 0.2s ease-out;
+  box-shadow: 0 0 10px #00ff68;
+}
 
-    .flash {
-      animation: flash 0.3s ease-in-out 2;
-    }
+.flash {
+  animation: flash 0.3s ease-in-out 2;
+}
 
-    @keyframes flash {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
   </style>
 </head>
 
 <body>
-  <!-- ANIMACIÓN DE CARGA INICIAL -->
-  <div id="preloader">
-    <div class="loading-container">
-      <div class="percentage" id="percentage">0%</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
+ <!-- Pantalla de precarga -->
+<div id="preloader">
+  <div class="loading-container">
+    <div class="percentage" id="percentage">0%</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
     </div>
   </div>
+</div>
+
 
   <!-- Título -->
   <h1>Lista de Fallas y Soluciones</h1>
@@ -164,34 +166,37 @@
     <div>By Lucas M. Tuillier</div>
   </div>
 
-  <!-- SCRIPT ANIMACIÓN -->
-  <script>
-    const fill = document.getElementById("progressFill");
-    const percentText = document.getElementById("percentage");
-    const preloader = document.getElementById("preloader");
+<script>
+  // Animación de precarga al iniciar
+  const fill = document.getElementById("progressFill");
+  const percentText = document.getElementById("percentage");
+  const preloader = document.getElementById("preloader");
 
-    const smoothProgress = [1, 4, 7, 11, 16, 21, 27, 33, 38, 44, 50, 57, 63, 68, 74, 79, 83, 88, 93, 97, 100];
-    let index = 0;
+  // Progreso simulado con saltos para simular carga real
+  const smoothProgress = [1, 4, 7, 11, 16, 21, 27, 33, 38, 44, 50, 57, 63, 68, 74, 79, 83, 88, 93, 97, 100];
+  let index = 0;
 
-    function updateProgress() {
-      if (index < smoothProgress.length) {
-        const value = smoothProgress[index];
-        fill.style.width = value + "%";
-        percentText.textContent = value + "%";
-        index++;
-        setTimeout(updateProgress, 150);
-      } else {
-        percentText.classList.add("flash");
-        fill.classList.add("flash");
-        setTimeout(() => {
-          preloader.style.display = "none";
-        }, 800);
-      }
+  function updateProgress() {
+    if (index < smoothProgress.length) {
+      const value = smoothProgress[index];
+      fill.style.width = value + "%";
+      percentText.textContent = value + "%";
+      index++;
+      setTimeout(updateProgress, 120);
+    } else {
+      percentText.classList.add("flash");
+      fill.classList.add("flash");
+      setTimeout(() => {
+        preloader.style.display = "none";
+      }, 800); // Oculta la animación al final
     }
+  }
 
-    window.onload = () => {
-      setTimeout(updateProgress, 300);
-    };
-  </script>
+  // Ejecuta al cargar el documento
+  window.onload = () => {
+    setTimeout(updateProgress, 300);
+  };
+</script>
+
 </body>
 </html>
