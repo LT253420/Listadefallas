@@ -91,10 +91,11 @@
 <!-- PEGA ESTE CÓDIGO EN TU ARCHIVO HTML -->
 
 <style>
-  /* /// Scroll general habilitado */
+  /* /// Scroll vertical habilitado solo */
   html, body {
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   body {
@@ -112,17 +113,26 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+    max-width: 100%;
   }
 
-  /* /// Botón de Google login centrado */
-  #loginContainer {
-    margin-top: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 8px #00ff00;
+    z-index: 1;
+    width: 100%;
   }
 
-  /* /// Botones principales alineados horizontal en PC */
+  h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  /* /// Contenedor de botones principales alineados horizontal solo en PC */
   .main-button-row {
     display: flex;
     flex-direction: column;
@@ -138,7 +148,64 @@
     }
   }
 
-  /* /// Botón Home fijo en scroll */
+  /* /// Contenedor general de botones */
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+    z-index: 1;
+    margin-bottom: 30px;
+  }
+
+  /* /// Botones estilo clásico */
+  button {
+    background: transparent;
+    border: 2px solid #00ff00;
+    color: #00ff68;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px #00ff0055;
+    min-height: 40px;
+  }
+
+  button:hover {
+    background-color: #00ff68;
+    color: #222222;
+    box-shadow: 0 0 15px #00ff00;
+  }
+
+  /* /// Texto justificado para explicaciones */
+  .response-box {
+    margin-top: 20px;
+    font-size: 1.05rem;
+    text-align: justify;
+    color: #ffffffcc;
+    padding: 10px;
+    z-index: 1;
+    max-width: 800px;
+  }
+
+  /* /// Footer visible sin superposición */
+  .footer {
+    margin-top: 50px;
+    text-align: center;
+    color: #3d3b3b;
+    font-size: 0.9rem;
+    z-index: 1;
+    padding-bottom: 30px;
+  }
+
+  .footer img {
+    max-height: 50px;
+    margin-bottom: 10px;
+  }
+
+  /* /// Botón fijo en esquina inferior derecha */
   .back-button {
     position: fixed;
     bottom: 20px;
@@ -172,57 +239,47 @@
     fill: #222222;
   }
 
-  /* /// Footer siempre visible, sin superposición */
-  .footer {
-    margin-top: 50px;
-    text-align: center;
-    color: #3d3b3b;
-    font-size: 0.9rem;
-    z-index: 1;
-    padding-bottom: 30px;
-  }
-
-  .footer img {
-    max-height: 50px;
-    margin-bottom: 10px;
-  }
-
-  /* /// Texto de ayuda justificado */
-  .response-box {
-    margin-top: 20px;
-    font-size: 1.05rem;
-    color: #ffffffcc;
-    padding: 10px;
-    text-align: justify;
-    max-width: 800px;
-  }
-
-  /* /// Botones generales */
-  button {
-    background: transparent;
-    border: 2px solid #00ff00;
+  /* /// Barra superior de sesión */
+  .top-bar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     color: #00ff68;
-    font-size: 1rem;
-    padding: 12px;
-    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+  }
+
+  /* /// Contenedor de login inicial */
+  #loginContainer {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #loginBtn {
+    margin-top: 20px;
+  }
+
+  #logoutBtn {
+    background: transparent;
+    color: #00ff68;
+    border: 2px solid #00ff00;
+    padding: 6px 10px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 8px #00ff0055;
   }
 
-  button:hover {
-    background-color: #00ff68;
-    color: #222222;
-    box-shadow: 0 0 15px #00ff00;
-  }
-
-  /* /// Adaptaciones móviles */
+  /* /// Responsivo para móviles */
   @media (max-width: 600px) {
     h1 { font-size: 1.5rem; }
     button { font-size: 0.95rem; padding: 10px; }
     .footer { padding-bottom: 20px; }
   }
 </style>
+
   
 
 </head>
