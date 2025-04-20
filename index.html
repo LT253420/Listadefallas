@@ -98,6 +98,24 @@
     overflow-x: hidden;
   }
 
+/* Estilo base del contenedor de botones principales */
+  #mainMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+    z-index: 1;
+  }
+
+  /* Este nuevo estilo centra los botones cuando está activo */
+  .centrado-en-pantalla {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
   body {
     margin: 0;
     padding: 20px;
@@ -354,6 +372,31 @@
   </div>
 
   <script>
+
+    // Modificamos el comportamiento cuando se detecta que está en el menú principal
+  function mostrarComoUsar() {
+    ocultarTodo();
+    usoMenu.style.display = "flex";
+    mainMenu.classList.remove('centrado-en-pantalla');
+  }
+
+  function mostrarFallas() {
+    ocultarTodo();
+    fallasMenu.style.display = "flex";
+    mainMenu.classList.remove('centrado-en-pantalla');
+  }
+
+  function goToHome() {
+    volverA("main");
+    mainMenu.classList.add('centrado-en-pantalla');
+  }
+
+  // Cuando cargue la app, agregamos la clase centrado al mainMenu
+  window.addEventListener("DOMContentLoaded", () => {
+    const mainMenu = document.getElementById("mainMenu");
+    mainMenu.classList.add("centrado-en-pantalla");
+  });
+    
     const respuestasPorFalla = {
       "No enciende": [
         ["Revisar batería", "Medir batería para saber si funciona."],
