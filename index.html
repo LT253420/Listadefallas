@@ -93,7 +93,39 @@
 
 <style>
 
-/* === ANIMACIÓN DE CARGA INICIAL === */
+<script>
+  // Animación de precarga al iniciar
+  const fill = document.getElementById("progressFill");
+  const percentText = document.getElementById("percentage");
+  const preloader = document.getElementById("preloader");
+
+  // Progreso simulado con saltos para simular carga real
+  const smoothProgress = [1, 4, 7, 11, 16, 21, 27, 33, 38, 44, 50, 57, 63, 68, 74, 79, 83, 88, 93, 97, 100];
+  let index = 0;
+
+  function updateProgress() {
+    if (index < smoothProgress.length) {
+      const value = smoothProgress[index];
+      fill.style.width = value + "%";
+      percentText.textContent = value + "%";
+      index++;
+      setTimeout(updateProgress, 120);
+    } else {
+      percentText.classList.add("flash");
+      fill.classList.add("flash");
+      setTimeout(() => {
+        preloader.style.display = "none";
+      }, 800); // Oculta la animación al final
+    }
+  }
+
+  // Ejecuta al cargar el documento
+  window.onload = () => {
+    setTimeout(updateProgress, 300);
+  };
+</script>
+
+/* === ANIMACIÓN DE INICIO === */
 #preloader {
   position: fixed;
   top: 0; left: 0;
@@ -613,5 +645,38 @@
 
     
   </script>
+  
+<script>
+  // BARRA DE CARGA ANIMADA
+  const fill = document.getElementById("progressFill");
+  const percentText = document.getElementById("percentage");
+  const preloader = document.getElementById("preloader");
+
+  // Valores de progreso simulados para parecer realista
+  const smoothProgress = [1, 4, 8, 13, 19, 26, 34, 43, 53, 64, 76, 85, 92, 97, 100];
+  let index = 0;
+
+  function updateProgress() {
+    if (index < smoothProgress.length) {
+      const value = smoothProgress[index];
+      fill.style.width = value + "%";
+      percentText.textContent = value + "%";
+      index++;
+      setTimeout(updateProgress, 180);
+    } else {
+      percentText.classList.add("flash");
+      fill.classList.add("flash");
+      setTimeout(() => {
+        preloader.style.display = "none";
+      }, 600);
+    }
+  }
+
+  window.addEventListener("load", () => {
+    setTimeout(updateProgress, 400);
+  });
+</script>
+
+  
 </body>
 </html>
