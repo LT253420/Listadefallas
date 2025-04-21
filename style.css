@@ -147,6 +147,63 @@ button:hover {
   cursor: pointer;
 }
 
+#preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  height: 50px;
+  position: relative;
+}
+
+.percentage {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  font-size: 1.2rem;
+  color: #00ff68;
+  text-shadow: 0 0 8px #00ff68;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  border: 2px solid #00ff68;
+  box-shadow: 0 0 10px #00ff68;
+  background: rgba(0, 255, 104, 0.1);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #00ff68;
+  width: 0%;
+  transition: width 0.2s ease-out;
+  box-shadow: 0 0 10px #00ff68;
+}
+
+.flash {
+  animation: flash 0.3s ease-in-out 2;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
 /* Contenedor del login */
 #loginContainer {
   margin-top: 100px;
