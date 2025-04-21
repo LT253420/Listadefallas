@@ -89,6 +89,8 @@
 
   </script>
 
+<!-- PEGA ESTE CÓDIGO EN TU ARCHIVO HTML -->
+
 <style>
 
 <script>
@@ -125,23 +127,25 @@
 
 /* === ANIMACIÓN DE INICIO === */
 #preloader {
-  position: fixed;
-  inset: 0; /* reemplaza top/left/right/bottom con una sola línea */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #1a1a1a;
-  z-index: 9999;
-}
-    
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 300px;
-  height: 50px;
-  position: relative;
-}
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+ .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 300px;
+      height: 50px;
+      position: relative;
+    }
 
 .percentage {
   position: absolute;
@@ -162,22 +166,24 @@
 }
 
 .progress-fill {
-  height: 100%;
-  background: #00ff68;
-  width: 0%;
-  transition: width 0.2s ease-out;
-  box-shadow: 0 0 10px #00ff68;
-}
+      height: 100%;
+      background: #00ff68;
+      width: 0%;
+      transition: width 0.2s ease-out;
+      box-shadow: 0 0 10px #00ff68;
+    }
 
-.flash {
-  animation: flash 0.3s ease-in-out 2;
-}
+ .flash {
+      animation: flash 0.3s ease-in-out 2;
+    }
+
 
 @keyframes flash {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
+  
   /* /// Scroll vertical habilitado solo */
   html, body {
     height: 100%;
@@ -398,7 +404,7 @@
   </div>
 
  <!-- Pantalla de precarga -->
-<div id="preloader">
+ <div id="preloader">
   <div class="loading-container">
     <div class="percentage" id="percentage">0%</div>
     <div class="progress-bar">
@@ -418,10 +424,11 @@
   <div id="appContent" style="display:none; flex-direction: column; align-items: center; width: 100%;">
     <h1>Lista de Fallas y Soluciones</h1>
 
-    <div class="button-container" id="mainMenu">
-      <button onclick="mostrarComoUsar()">Cómo usar</button>
-      <button onclick="mostrarFallas()">Inicio - Ver fallas</button>
-    </div>
+     <!-- Botones principales -->
+  <div class="button-container">
+    <button onclick="showResponse('Iniciar diagnóstico')">INICIAR</button>
+    <button onclick="showResponse('Ver lista de fallas')">VER FALLAS</button>
+  </div>
 
     <div class="button-container" id="usoMenu" style="display:none;">
       <button onclick="volverA('main')">← Volver</button>
