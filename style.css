@@ -1,1 +1,173 @@
 
+/* Estilos generales */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #262626;
+  font-family: 'Consolas', 'Courier New', monospace;
+  color: #00ff00;
+  overflow-x: hidden;
+}
+
+/* Contenedor principal */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-image: PEGA_TU_IMAGEN_ACÁ;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+/* Título principal */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-shadow: 0 0 8px #00ff00;
+}
+
+/* Subtítulo de fallas */
+h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+/* Contenedor de botones */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+  z-index: 1;
+}
+
+/* Botones generales */
+button {
+  background: transparent;
+  border: 2px solid #00ff00;
+  color: #00ff68;
+  font-size: 1rem;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px #00ff0055;
+}
+
+button:hover {
+  background-color: #00ff68;
+  color: #222222;
+  box-shadow: 0 0 15px #00ff00;
+}
+
+/* Caja de respuestas */
+.response-box {
+  margin-top: 20px;
+  font-size: 1.05rem;
+  text-align: justify;
+  color: #ffffffcc;
+  padding: 10px;
+  z-index: 1;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  text-align: center;
+  color: #3d3b3b;
+  font-size: 0.9rem;
+  z-index: 1;
+  padding: 20px 10px;
+}
+
+.footer img {
+  max-height: 50px;
+  margin-bottom: 10px;
+}
+
+/* Botón flotante HOME */
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  border: 2px solid #00ff00;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #00ff0055;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.back-button svg {
+  fill: #00ff00;
+  width: 24px;
+  height: 24px;
+  transition: fill 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #00ff68;
+}
+
+.back-button:hover svg {
+  fill: #222222;
+}
+
+/* Barra superior con email y logout */
+.top-bar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #00ff68;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 1000;
+}
+
+/* Botón de logout */
+#logoutBtn {
+  background: transparent;
+  color: #00ff68;
+  border: 2px solid #00ff00;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Contenedor del login */
+#loginContainer {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .footer {
+    padding-bottom: 60px;
+  }
+}
