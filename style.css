@@ -279,12 +279,12 @@ button:hover {
     transform: scale(0.9);
     filter: drop-shadow(0 0 8px #00ff68);
   }
-  70% {
+50% {
     opacity: 1;
     transform: scale(1.02);
     filter: drop-shadow(0 0 12px #00ff68);
   }
-  80% {
+  70% {
     opacity: 1;
     transform: scale(1);
     filter: drop-shadow(0 0 6px #00ff68);
@@ -297,12 +297,12 @@ button:hover {
     transform: scale(0.9);
     filter: drop-shadow(0 0 8px #00ff68);
   }
-  35% {
+  30% {
     opacity: 1;
     transform: scale(1.02);
     filter: drop-shadow(0 0 12px #00ff68);
   }
-  100% {
+  60% {
     opacity: 1;
     transform: scale(1);
     filter: drop-shadow(0 0 6px #00ff68);
@@ -310,7 +310,7 @@ button:hover {
 }
 
 .hud-appear {
-  animation: hudFade 0.2s ease-out;
+  animation: hudFade 0.4s ease-out;
 }
 
 
