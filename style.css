@@ -310,7 +310,7 @@ button:hover {
 }
 
 .hud-appear {
-  animation: hudFade 0.4s ease-out;
+  animation: hudFade 0.2s ease-out;
 }
 
 
