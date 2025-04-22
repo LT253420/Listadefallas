@@ -284,7 +284,7 @@ button:hover {
     transform: scale(1.02);
     filter: drop-shadow(0 0 12px #00ff68);
   }
-  100% {
+  80% {
     opacity: 1;
     transform: scale(1);
     filter: drop-shadow(0 0 6px #00ff68);
