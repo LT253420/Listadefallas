@@ -354,7 +354,7 @@
     ocultarTodo();
     const respuestas = document.getElementById("respuestas");
     respuestas.style.display = "flex";
-    respuestas.classList.add("fade-in");
+    respuestas.classList.add("hud-appear");
     respuestas.innerHTML = `<button onclick="volverA('fallas')">← Volver</button><h2>${falla}</h2>`;
     respuestasPorFalla[falla].forEach(([titulo, descripcion]) => {
       const btn = document.createElement("button");
@@ -362,7 +362,7 @@
       btn.onclick = () => {
         document.querySelectorAll(".response-box").forEach(e => e.remove());
         const box = document.createElement("div");
-        box.className = "response-box fade-in";
+        box.className = "response-box hud-appear";
         box.innerHTML = `➡ ${descripcion}`;
         respuestas.appendChild(box);
       };
