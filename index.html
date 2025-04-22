@@ -322,21 +322,21 @@
     ocultarTodo();
     const uso = document.getElementById("usoMenu");
     uso.style.display = "flex";
-    uso.classList.add("fade-in");
+   uso.classList.add("hud-appear");
   }
 
   function mostrarFallas() {
     ocultarTodo();
     const fallas = document.getElementById("fallasMenu");
     fallas.style.display = "flex";
-    fallas.classList.add("fade-in");
+    fallas.classList.add("hud-appear");;
   }
 
   function ocultarTodo() {
     ["mainMenu", "usoMenu", "fallasMenu", "respuestas"].forEach(id => {
       const el = document.getElementById(id);
       el.style.display = "none";
-      el.classList.remove("fade-in");
+      el.classList.remove("hud-appear");
     });
     const respuestas = document.getElementById("respuestas");
     respuestas.innerHTML = "";
@@ -347,7 +347,7 @@
     const destino = seccion === "main" ? "mainMenu" : "fallasMenu";
     const menu = document.getElementById(destino);
     menu.style.display = "flex";
-    menu.classList.add("fade-in");
+    menu.classList.add("hud-appear");
   }
 
   function showResponse(falla) {
