@@ -195,7 +195,7 @@
       loginContainer.style.display = "none";
       appContent.style.display = "flex";
       appContent.classList.add("hud-appear");
-      appContent.classList.add("fade-in"); // animación inicial
+      appContent.classList.add("hud-appear"); // animación inicial
       emailText.textContent = user.email;
       logoutBtn.style.display = "inline-block";
     } else {
@@ -398,7 +398,7 @@
       setTimeout(() => {
         preloader.style.display = "none";
         const appContent = document.getElementById("appContent");
-        appContent.classList.add("fade-in");
+        appContent.classList.add("hud-appear");
       }, 800);
     }
   }
