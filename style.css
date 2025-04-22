@@ -256,7 +256,7 @@ button:hover {
 }
 
 .holo-anim {
-  animation: holographic-fade 0.6s ease-out;
+  animation: holographic-fade 0.4s ease-out;
 }
 
 
@@ -265,7 +265,7 @@ button:hover {
   }
 }
 .fade-in {
-  animation: fadeIn 0.8s ease-in-out;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
 @keyframes fadeIn {
