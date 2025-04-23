@@ -48,6 +48,9 @@ h2 {
   max-width: 400px;
   padding: 0 20px;
   z-index: 1;
+}
+
+/* Centrado del menú principal */
 #mainMenu {
   position: absolute;
   top: 50%;
@@ -58,6 +61,7 @@ h2 {
   justify-content: center;
   gap: 1rem;
 }
+
 
 
 }
