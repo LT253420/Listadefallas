@@ -58,10 +58,10 @@ h2 {
   z-index: 1;
 }
 button {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    padding: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 #mainMenu {
   margin: auto;
