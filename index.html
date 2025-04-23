@@ -244,27 +244,39 @@
       ]
     };
 
+function mostrarComoUsar() {
+  ocultarTodo();
+  const uso = document.getElementById("usoMenu");
+  uso.style.display = "flex";
+  void uso.offsetWidth; // Reinicia la animación
+  uso.classList.add("hud-appear");
+}
 
-    function mostrarComoUsar() {
-      ocultarTodo();
-      document.getElementById("usoMenu").style.display = "flex";
-    }
+function mostrarFallas() {
+  ocultarTodo();
+  const fallas = document.getElementById("fallasMenu");
+  fallas.style.display = "flex";
+  void fallas.offsetWidth;
+  fallas.classList.add("hud-appear");
+}
 
-    function mostrarFallas() {
-      ocultarTodo();
-      document.getElementById("fallasMenu").style.display = "flex";
-    }
+function mostrarContacto() {
+  ocultarTodo();
+  const contacto = document.getElementById("contactoMenu");
+  contacto.style.display = "flex";
+  void contacto.offsetWidth;
+  contacto.classList.add("hud-appear");
+}
 
-    function mostrarContacto() {
-      ocultarTodo();
-      document.getElementById("contactoMenu").style.display = "flex";
-    }
+function volverA(seccion) {
+  ocultarTodo();
+  const destino = seccion === "main" ? "mainMenu" : "fallasMenu";
+  const menu = document.getElementById(destino);
+  menu.style.display = "flex";
+  void menu.offsetWidth;
+  menu.classList.add("hud-appear");
+}
 
-    function volverA(seccion) {
-      ocultarTodo();
-      const destino = seccion === "main" ? "mainMenu" : "fallasMenu";
-      document.getElementById(destino).style.display = "flex";
-    }
 
     function goToHome() {
       volverA("main");
