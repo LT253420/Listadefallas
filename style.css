@@ -48,6 +48,11 @@ h2 {
   max-width: 400px;
   padding: 0 20px;
   z-index: 1;
+  #mainMenu {
+  justify-content: center;
+  height: 100vh;
+}
+
 }
 
 /* Botones generales */
