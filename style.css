@@ -21,6 +21,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+  padding-top: 80px;
 }
 #appContent {
   flex: 1;
@@ -250,6 +251,9 @@ button:hover {
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 600px) {
+    body {
+    padding-top: 100px;
+  }
   .button-container {
     padding: 0 20px !important;
   }
