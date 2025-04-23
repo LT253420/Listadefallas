@@ -310,7 +310,23 @@ button:hover {
     opacity: 1;
   }
 }
-
+@keyframes hudFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: drop-shadow(0 0 8px #00ff68);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 12px #00ff68);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px #00ff68);
+  }
+}
 
 .hud-appear {
   animation: hudFade 0.4s ease-out;
