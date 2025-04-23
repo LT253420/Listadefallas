@@ -158,16 +158,19 @@ button:hover {
 
 /* Barra superior con email y logout */
 .top-bar {
-  position: fixed;
+  position: absolute; /* Cambiar de fixed a absolute o relative si lo preferís */
   top: 10px;
   right: 10px;
   color: #00ff68;
   display: flex;
   flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.4); /* leve fondo si querés que se vea */
+  justify-content: flex-end;
   align-items: flex-end;
   gap: 15px;
   z-index: 1000;
   margin-top: 10px;
+  box-sizing: border-box;
 }
 .top-bar button {
   margin-top: 10px;
