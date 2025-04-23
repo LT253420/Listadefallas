@@ -50,6 +50,7 @@ h2 {
   z-index: 1;
   #mainMenu {
   justify-content: center;
+  align-items: Center;
   height: 100vh;
 }
 
