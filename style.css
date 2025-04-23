@@ -288,20 +288,21 @@ button:hover {
 @keyframes hudFade {
   0% {
     opacity: 0;
-    transform: scale(0.9);
+    transform: translate(-50%, -50%) scale(0.9);
     filter: drop-shadow(0 0 8px #00ff68);
   }
-30% {
+  30% {
     opacity: 1;
-    transform: scale(1.02);
+    transform: translate(-50%, -50%) scale(1.02);
     filter: drop-shadow(0 0 12px #00ff68);
   }
   60% {
     opacity: 1;
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
     filter: drop-shadow(0 0 6px #00ff68);
   }
 }
+
 
 @keyframes hudFade {
   0% {
