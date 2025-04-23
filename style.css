@@ -166,11 +166,11 @@ button:hover {
   padding: 10px 20px;
   color: #00ff68;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background-color: rgba(0, 0, 0, 0.1); /* leve fondo si querés que se vea */
   justify-content: space-between;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 0;
   z-index: 1000;
   margin-top: 10px;
