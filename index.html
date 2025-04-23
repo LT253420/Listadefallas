@@ -34,6 +34,7 @@
     <div class="button-container" id="mainMenu">
       <button onclick="mostrarComoUsar()">Cómo usar</button>
       <button onclick="mostrarFallas()">Inicio - Ver fallas</button>
+      <button onclick="mostrarContacto()">Contacto - Soporte</button>
     </div>
 
     <div class="button-container" id="usoMenu" style="display:none;">
@@ -50,6 +51,7 @@
     </div>
 
     <div class="button-container" id="fallasMenu" style="display:none;">
+      <button onclick="volverA('main')">← Volver</button>
       <button onclick="showResponse('No enciende')">No enciende</button>
       <button onclick="showResponse('No tiene sonido')">No tiene sonido</button>
       <button onclick="showResponse('No puedo hacer llamadas')">No puedo hacer llamadas</button>
@@ -67,6 +69,19 @@
       <button onclick="showResponse('No puedo desbloquear el celular (patrón, Contraseña o huella)')">No puedo desbloquear el celular (patrón, Contraseña o huella)</button>
       <button onclick="showResponse('No carga la batería')">No carga la batería</button>
     </div>
+    
+    <div class="button-container" id="contactoMenu" style="display:none;">
+  <button onclick="volverA('main')">← Volver</button>
+  
+  <button disabled style="pointer-events: none; opacity: 1;">
+    📞 WhatsApp: <strong>PONÉ TU NÚMERO ACÁ</strong>
+  </button>
+
+  <button disabled style="pointer-events: none; opacity: 1; box-shadow: 0 0 15px #00ff00; background-color: #00ff68; color: #000;">
+    📷 Instagram: <strong>PONÉ TU INSTAGRAM ACÁ</strong>
+  </button>
+</div>
+
 
     <div class="button-container" id="respuestas" style="display:none;"></div>
 
@@ -333,14 +348,12 @@
   }
 
   function ocultarTodo() {
-    ["mainMenu", "usoMenu", "fallasMenu", "respuestas"].forEach(id => {
-      const el = document.getElementById(id);
-      el.style.display = "none";
-      el.classList.remove("hud-appear");
-    });
-    const respuestas = document.getElementById("respuestas");
-    respuestas.innerHTML = "";
-  }
+    ["mainMenu", "usoMenu", "fallasMenu", "respuestas", "contactoMenu"].forEach(id => {
+  const el = document.getElementById(id);
+  el.style.display = "none";
+  el.classList.remove("hud-appear");
+});
+
 
   function volverA(seccion) {
     ocultarTodo();
@@ -384,6 +397,14 @@
   window.onload = () => {
     setTimeout(updateProgress, 300);
   };
+  
+  function mostrarContacto() {
+  ocultarTodo();
+  const contacto = document.getElementById("contactoMenu");
+  contacto.style.display = "flex";
+  contacto.classList.add("hud-appear");
+};
+
 
   function updateProgress() {
     if (index < smoothProgress.length) {
