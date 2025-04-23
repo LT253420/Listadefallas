@@ -1,4 +1,4 @@
-/* Estilos generales */
+3/* Estilos generales */
 html, body {
   margin: 0;
   height: 100%;
@@ -188,6 +188,9 @@ button:hover {
   padding: 4px 8px;
   font-size: 0.85rem;
   border-radius: 6px;
+  max-width: 150px;        /* 👈 límite de ancho */
+  white-space: nowrap;     /* 👈 que no se divida en varias líneas */
+  flex-shrink: 0;          /* 👈 que no se achique */
   cursor: pointer;
 }
 
