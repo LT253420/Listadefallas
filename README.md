@@ -34,7 +34,7 @@ Ideal para técnicos en reparación, estudiantes o autodidactas.
 ![Pantalla Principal](ruta/de/tu/imagen.png)
 
 
-##🧱 Tecnologías
+## 🧱 Tecnologías
 HTML + CSS + JavaScript
 
 Firebase Authentication
@@ -43,22 +43,22 @@ Diseño responsive
 
 Estilo LED verde sobre fondo oscuro 🌌
 
-##📂 Archivos principales
+## 📂 Archivos principales
 
 Archivo	Descripción
 index.html	Estructura principal de la aplicación
 style.css	Estilos personalizados con efecto HUD
 README.md	Esta descripción del proyecto
 
-##📌 Pendiente o futuro
+## 📌 Pendiente o futuro
 Agregar nuevas fallas fácilmente
 Hacer la estructura más modular
 Sistema para subir fallas desde formulario
 Animaciones de partículas ✨ (en progreso)
 
-##✍️ Autor
+## ✍️ Autor
 Lucas M. Tuillier
 🔧 Técnico en reparación de celulares y microelectrónica
 📘 Creador de contenidos educativos
 
-##Hecho con ❤️ para ayudar a más técnicos a diagnosticar mejor.
+## Hecho con ❤️ para ayudar a más técnicos a diagnosticar mejor.
