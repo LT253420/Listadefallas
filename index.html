@@ -40,7 +40,7 @@
     <div class="button-container" id="usoMenu" style="display:none;">
       <button onclick="volverA('main')">← Volver</button>
       <h2>¿Cómo usar la lista?</h2>
-      <div class="response-box justificado">
+      <div class="response-box static justificado">
         La lista está hecha de forma simple: le das a inicio, y seleccionás de toda la lista la falla que ves en tu equipo.
         Te van a salir las posibles fallas de un equipo para que las revises. Tocás en una, y te aparece un texto acerca de sus posibles soluciones.<br><br>
         Recordá que un componente dañado se cambia por uno nuevo, un componente desconectado se vuelve a conectar,
@@ -267,12 +267,14 @@ function showResponse(falla) {
 
   if (respuestasPorFalla[falla]) {
     respuestasPorFalla[falla].forEach(([titulo, descripcion]) => {
+      
       const btn = document.createElement("button");
       btn.textContent = titulo;
       btn.onclick = () => {
-        document.querySelectorAll(".response-box").forEach(e => e.remove());
+      respuestas.querySelectorAll(".response-box.dynamic").forEach(e => e.remove());
+        
         const box = document.createElement("div");
-        box.className = "response-box hud-appear";
+        box.className = "response-box hud-appear dynamic";
         box.innerHTML = `➡ ${descripcion}`;
         respuestas.appendChild(box);
       };
@@ -285,24 +287,30 @@ function mostrarComoUsar() {
   ocultarTodo();
   const uso = document.getElementById("usoMenu");
   uso.style.display = "flex";
-  void uso.offsetWidth; // Reinicia la animación
-  uso.classList.add("hud-appear");
+  requestAnimationFrame(() => {
+    uso.classList.add("hud-appear");
+  });
 }
+
+  
 
 function mostrarFallas() {
   ocultarTodo();
   const fallas = document.getElementById("fallasMenu");
   fallas.style.display = "flex";
-  void fallas.offsetWidth;
-  fallas.classList.add("hud-appear");
+  requestAnimationFrame(() => {
+    fallas.classList.add("hud-appear");
+  });
 }
+
 
 function mostrarContacto() {
   ocultarTodo();
   const contacto = document.getElementById("contactoMenu");
   contacto.style.display = "flex";
-  void contacto.offsetWidth;
-  contacto.classList.add("hud-appear");
+  requestAnimationFrame(() => {
+    contacto.classList.add("hud-appear");
+  });
 }
 
 function volverA(seccion) {
@@ -310,9 +318,11 @@ function volverA(seccion) {
   const destino = seccion === "main" ? "mainMenu" : "fallasMenu";
   const menu = document.getElementById(destino);
   menu.style.display = "flex";
-  void menu.offsetWidth;
-  menu.classList.add("hud-appear");
+  requestAnimationFrame(() => {
+    menu.classList.add("hud-appear");
+  });
 }
+
 
 
     function goToHome() {
