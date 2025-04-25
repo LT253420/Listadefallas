@@ -460,13 +460,15 @@ function volverA(seccion) {
   });
 }
 
+function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+  }
 
-
-    function goToHome() {
+function goToHome() {
       volverA("main");
     }
 
-    function ocultarTodo() {
+function ocultarTodo() {
       ["mainMenu", "usoMenu", "fallasMenu", "respuestas", "contactoMenu"].forEach(id => {
         const el = document.getElementById(id);
         el.style.display = "none";
