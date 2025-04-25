@@ -384,6 +384,18 @@ button:hover {
   }
 }
 
+/* Bordes oscuros en modo claro */
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode button,
+body.light-mode .response-box,
+body.light-mode p,
+body.light-mode .top-bar,
+body.light-mode .footer {
+  text-shadow: 1px 1px 2px #00000088;
+}
+
+
 .hud-appear {
   animation: hudFade 0.4s ease-out;
 }
