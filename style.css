@@ -400,7 +400,9 @@ body.light-mode .footer {
   animation: hudFade 0.4s ease-out;
 }
 
-
+* {
+  user-select: none;
+}
 
 
 
