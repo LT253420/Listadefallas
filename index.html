@@ -60,37 +60,9 @@
       <button onclick="showResponse('No puedo hacer llamadas')">No puedo hacer llamadas</button>
       <button onclick="showResponse('El teléfono se calienta')">El teléfono se calienta</button>
       <button onclick="showResponse('Mi celular se apaga solo')">Mi celular se apaga solo</button>
-      <button onclick="showResponse('Mi celular se reinicia solo')">Mi celular se reinicia solo</button>
-      <button onclick="showResponse('La pantalla no prende pero el celular funciona')">La pantalla no prende pero el celular funciona</button>
-      <button onclick="showResponse('La pantalla queda en blanco / tiene interferencia')">La pantalla queda en blanco / tiene interferencia</button>
-      <button onclick="showResponse('La pantalla parpadea')">La pantalla parpadea</button>
-      <button onclick="showResponse('Mi celular se apaga cuando llaman')">Mi celular se apaga cuando llaman</button>
-      <button onclick="showResponse('La pantalla se apaga cuando escucho un audio o me llaman')">La pantalla se apaga cuando escucho un audio o me llaman</button>
-      <button onclick="showResponse('Manchas de liquido negro, suciedad o burbujas')">Manchas de liquido negro, suciedad o burbujas</button>
-      <button onclick="showResponse('No escucho cuando me hablan ni puedo escuchar los audios')">No escucho cuando me hablan ni puedo escuchar los audios</button>
-      <button onclick="showResponse('No escuchan mi voz en llamada ni audios')">No escuchan mi voz en llamada ni audios</button>
-      <button onclick="showResponse('No puedo desbloquear el celular (patrón, Contraseña o huella)')">No puedo desbloquear el celular (patrón, Contraseña o huella)</button>
-      <button onclick="showResponse('No carga la batería')">No carga la batería</button>
-      <button onclick="showResponse('El celular no mantiene carga / se desgasta la batería')">El celular no mantiene carga / se desgasta la batería</button>
-      <button onclick="showResponse('Mi celular no es reconocido por la PC')">Mi celular no es reconocido por la PC</button>
-      <button onclick="showResponse('La camara no funciona (la app se cierra o no saca fotos)')">La camara no funciona (la app se cierra o no saca fotos)</button>
-      <button onclick="showResponse('La memoria esta llena (sin archivos, ni apps instaladas)')">La memoria esta llena (sin archivos, ni apps instaladas)</button>
-      <button onclick="showResponse('El celular está lento y se calienta')">El celular está lento y se calienta</button>
-      <button onclick="showResponse('Solo llamadas de emergencia')">Solo llamadas de emergencia</button>
-      <button onclick="showResponse('Wifi No se activa')">Wifi No se activa</button>
-      <button onclick="showResponse('No detecta Teclas o Botones')">No detecta Teclas o Botones</button>
-      <button onclick="showResponse('Vibra al conectar batería / solo vibra')">Vibra al conectar batería / solo vibra</button>
-      <button onclick="showResponse('No lee la memoría extraíble (MicroSD)')">No lee la memoría extraíble (MicroSD)</button>
-      <button onclick="showResponse('Auricular (cable) Funciona A veces')">Auricular (cable) Funciona A veces</button>
-      <button onclick="showResponse('Auricular (inalámbrico / bluetooth) Funciona A veces')">Auricular (inalámbrico / bluetooth) Funciona A veces</button>
-      <button onclick="showResponse('Ingrese código de Desbloqueo al insertar SIM')">Ingrese código de Desbloqueo al insertar SIM</button>
-      <button onclick="showResponse('El Equipo tiene patrón, Clave de usuario o Cuenta de google')">El Equipo tiene patrón, Clave de usuario o Cuenta de google</button>
-      <button onclick="showResponse('el celular Calienta Junto a la batería')">el celular Calienta Junto a la batería</button>
-      <button onclick="showResponse('La pantalla hace rayas como de interferencia, lluvia o lineas de colores')">La pantalla hace rayas como de interferencia, lluvia o lineas de colores</button>
-      <button onclick="showResponse('Solo se escucha el sonido cuando lo acerco a la oreja')">Solo se escucha el sonido cuando lo acerco a la oreja</button>
-      <button onclick="showResponse('Solo se se escucha el sonido en altavoz (en llamada o en audios)')">Solo se se escucha el sonido en altavoz (en llamada o en audios)</button>
-      <button onclick="showResponse('Aparece un triángulo amarillo al encender o cargar (depende del ícono)')">Aparece un triángulo amarillo al encender o cargar (depende del ícono)</button>
-
+      <button onclick="showSubOptions('fallaCarga')">Falla de carga</button>
+      
+</div>
 
     </div>
     
@@ -107,6 +79,51 @@
   <div style="background-color: #00ff68; color: #000; padding: 10px; border-radius: 5px; box-shadow: 0 0 15px #00ff00; margin-top: 10px;">
     🤝 Te gustaría Colaborar?: <strong>Hacé tu aporte enviando al whatsapp fallas, soluciones o ideas que tenga para que la lista crezca! <br><br> También si necesitás ayuda o tenés algun inconveniente con la lista, te podemos ayudar ;)</strong>
   </div>
+
+<div id="fallaCarga" class="section" style="display:none;">
+    <h2>Buscar 5V en FPC de main</h2>
+    <div class="button-container">
+        <button class="correcto" onclick="showSubOptions('medirVBUS')">Correcta medición</button>
+        <button class="incorrecto" onclick="showSubOptions('reemplazarFPC')">Incorrecta medición</button>
+    </div>
+</div>
+
+<div id="reemplazarFPC" class="section" style="display:none;">
+    <h2>Solución</h2>
+    <p>Reemplazar FPC de carga.</p>
+</div>
+
+<div id="medirVBUS" class="section" style="display:none;">
+    <h2>Medir Línea VBUS hasta el PMIC</h2>
+    <div class="button-container">
+        <button class="correcto" onclick="showSubOptions('medirSalidasPMIC')">Correcta medición</button>
+        <button class="incorrecto" onclick="showSubOptions('buscarComponente')">Incorrecta medición</button>
+    </div>
+</div>
+
+<div id="buscarComponente" class="section" style="display:none;">
+    <h2>Solución</h2>
+    <p>Buscar en el componente donde se pierde el voltaje y reemplazarlo.</p>
+</div>
+
+<div id="medirSalidasPMIC" class="section" style="display:none;">
+    <h2>Medir salidas del PMIC</h2>
+    <div class="button-container">
+        <button class="correcto" onclick="showSubOptions('funciona')">Correcta medición</button>
+        <button class="incorrecto" onclick="showSubOptions('pmicDaniado')">Incorrecta medición</button>
+    </div>
+</div>
+
+<div id="funciona" class="section" style="display:none;">
+    <h2>¡Funciona!</h2>
+    <p>Problema solucionado.</p>
+</div>
+
+<div id="pmicDaniado" class="section" style="display:none;">
+    <h2>Solución: PMIC dañado o reballing necesario</h2>
+    <p>Realizar reballing en el integrado y colocarlo para verificar su funcionamiento. De no funcionar, se reemplaza por otro PMIC.</p>
+</div>
+  
 </div>
 
 
@@ -195,203 +212,7 @@
         ["Boton de encendido", "Puede estar en corto o dañado"],
         ["Batería", "Conector de batería dañado o batería en mal estado"],
         ["Placa Madre", "Cortocircuito o placa dañada"]
-      ],
-      
-      "Mi celular se reinicia solo": [
-        ["Boton de encendido", "Puede estar en corto o dañado"],
-        ["Batería", "Conector de batería dañado o batería en mal estado"],
-        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
-        ["Placa Madre", "Cortocircuito o placa dañada"]
-      ],
-      
-      "La pantalla no prende pero el celular funciona": [
-        ["Módulo / display / pantalla", "Puede tener la pantalla dañada"],
-        ["Conector del Módulo / display / pantalla", "Conector de módulo dañado, mal conectado o desconectado"],
-        ["Placa Madre", "daños internos en la placa"]
-      ],
-        
-      
-      "La pantalla queda en blanco / tiene interferencia": [
-        ["Módulo / display / pantalla", "Puede estar en corto o dañado"],
-        ["Batería", "Conector de batería dañado o batería en mal estado"],
-        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
-        ["Placa Madre", "Cortocircuito o placa dañada"]
-      ],
-        
-      
-      "La pantalla parpadea": [
-        ["Boton de encendido", "Puede tener la pantalla dañada"],
-        ["Fallas de Software", "Fallas en el sistema que producen ese error"],
-        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
-        ["Placa Madre", "Daños internos en la placa"]
-      ],
-          
-      
-      "Mi celular se apaga cuando llaman": [
-        ["Antena coaxial", "Puede estar en corto o dañada"],
-        ["Software", "Fallas en el sistema que producen ese error"],
-        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
-        ["Placa Madre", "Cortocircuito o placa dañada"]
-      ],
-          
-      
-      "La pantalla se apaga cuando escucho un audio o me llaman": [
-        ["Sensores", "Pueden estar en corto o dañado"],
-        ["Mal cambio de pantalla", "Una pantalla o módulo mal Colocado puede tapar los sensores y generar esos errores"],
-        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
-        ["Placa Madre", "Cortocircuito o placa dañada"]
-      ],
-          
-      
-      "Manchas de liquido negro, suciedad o burbujas": [
-        ["Fallas de pantalla (módulo)", "Puede estar mal trabajada, sucia, mal colocada. Requiere cambio de módulo."]
-      ],
-          
-      
-      "No escucho cuando me hablan ni puedo escuchar los audios": [
-        ["Speakers / parlantes", "Pueden estar dañados, desconectados o faltantes."],
-        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
-        ["Placa Madre", "Cortocircuito o placa dañada en módulo de audio"]
-      ],
-          
-      
-      "No escuchan mi voz en llamada ni audios": [
-        ["Micrófono / micrófonos", "Pueden estar dañados, desconectados o faltantes."],
-        ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad"],
-        ["Placa Madre", "Cortocircuito o placa dañada en módulo de audio"]
-      ],
-          
-      
-      "No puedo desbloquear el celular (patrón, Contraseña o huella)": [
-        ["Sensores de huella", "Pueden estar dañado, desconectado o faltante."],
-        ["Fallas en táctil", "Una pantalla o módulo de mala calidad, dañado o golpeado puede generar fallas en táctil evitando que se pueda desbloquear el equipo."],
-        ["Equipo Tildado", "Reinicio requerido. Posible falla de memoria o de sistema (falla temporal)."],
-        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad"],
-        ["Placa Madre", "Cortocircuito o placa dañada en componentes relacionados al táctil o inicio del equipo"]
-      ],
-
-      
-      "No carga la batería": [
-        ["Batería", "Fallas en batería dañada o mal conectada"],
-        ["Pin / puerto de carga", "Un pin o puerto de carga dañado, sucio o mal trabajado puede generar que el equipo no cargue."],
-        ["Sulfato / suciedad", "Daños o fallas producidos por sulfato o suciedad en el pin o zonas relacionadas a la carga."],
-        ["Placa Madre", "Cortocircuito o placa dañada en sector de carga."]
-      ],
-
-      
-      "El celular no mantiene carga / se desgasta la batería": [
-        ["Batería", "Batería dañada o desgastada."],
-        ["Cargador no indicado", "Cargador de mala calidad / no original o dañado. Se recomienda probar con otro cargador"],
-        ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad. Generando que se consuma energía cuando no debería."],
-        ["Placa madre", "Fallas,Cortocircuito o fuga en Placa. Fallas en circuito de carga."]
-        ],
-
-      
-      "Mi celular no es reconocido por la PC": [
-      ["Pin / puerto de carga", "Pin o puerto de carga dañado,sucio o faltante."],
-      ["Puerto USB de la PC", "Puerto USB de la PC dañado,sucio o faltante."],
-      ["Cable USB", "Un cable USB dañado, sin conexión de datos o que solo sirve para cargar pueden afectar."],
-      ["Drivers en PC no instalados", "Controladores del dispositivo de la computadora no instalados, que evitan conectar el equipo."],
-      ["Placa madre", "Fallas en placa. Revisar Circuito de conexión de datos."]
-    ],
-    "La camara no funciona (la app se cierra o no saca fotos)": [
-      ["Cámara", "Cámara desconectada, dañada o faltante. Cambio de cámara recomendado."],
-      ["Conectores", "Conectores FPC de placa o de cámara dañados."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de funcionamiento de cámaras."],
-      ["SoftWare", "Problemas en software dañado o en mal funcionamiento. Se recomienda formateo o Flasheo."]
-    ],
-    "La memoria esta llena (sin archivos, ni apps instaladas)": [
-      ["Problemas en software", "Posible virus almacenado en el sistema. Se recomienda formateo o en casos graves, flasheo."],
-      ["Archivos Residuales", "El equipo acumula datos innecesarios, que no fueron eliminados. Generando un espacio importante ocupado. Se recomienda formateo."]
-    ],
-    "El celular está lento y se calienta": [
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de encendido y funcionamiento."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Sobrecarga en memorias", "Sobrecarga de archivos y datos en memoria RAM o memoria ROM. Se recomienda limpieza."],
-      ["Software", "Sistema operativo dañado o con fallas. Se recomienda formateo o flasheo."],
-      ["Antiguedad", "El equipo es demasiado viejo, tiene un mal uso o desgaste notable en sus componentes internos. Generando sobrecalentamientos."]
-    ],
-    "Solo llamadas de emergencia": [
-      ["Bandeja PortaSIM", "Bandeja dañada, sucia o faltante."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["SIM / Chip", "Un chip / SIM dañado o dado de baja dan problemas de conectividad."],
-      ["Antenas Coaxiales / Flex", "Antenas dañadas, desconectadas o faltantes."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de RF."],
-      ["Equipo Importado", "El equipo proviene fuera del país y no está liberado. Requiere Código de liberación."],
-      ["SoftWare", "Problemas en software dañado o en mal funcionamiento. Se recomienda formateo o Flasheo."],
-      ["IMEI", "IMEI en blacklist. Reportado como equipo con robo, hurto o extravío."]
-    ],
-    "Wifi No se activa": [
-      ["Antenas Coaxiales / flex", "Antenas dañadas, desconectadas o faltantes."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de Conectividad WIFI."],
-      ["SoftWare", "Problemas en software dañado o en mal funcionamiento. Se recomienda formateo o Flasheo."]
-    ],
-    "No detecta Teclas o Botones": [
-      ["Botones / flex", "Botones o flex desconectados, sulfatados, dañados o faltantes."],
-      ["Touch / táctil", "Táctil o touch mal conectado, sucios, dañados o faltantes. Se recomienda cambio de módulo."],
-      ["Módulo de imagen", "Módulo dañado, mal conectado, sucio o faltante. Se recomienda cambio de módulo."]
-    ],
-    "Vibra al conectar batería / solo vibra": [
-      ["Módulo de imagen", "Módulo dañado, mal conectado, sucio o faltante. Se recomienda cambio de módulo."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Conectores", "Conectores FPC de placa o del módulo dañados."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de Encendido."]
-    ],
-    "No lee la memoría extraíble (MicroSD)": [
-      ["Bandeja PortaSD (portasim)", "Bandeja dañada, sucia o faltante."],
-      ["Memoria SD", "Memoria dañada, con virus o en un formato inadecuado. Se recomienda formatear memoria o reemplazarla."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de lectora de SD."]
-    ],
-    "Auricular (cable) Funciona A veces": [
-      ["Conector", "Conector Jack de 3.5mm dañado, sucio o faltante."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad. Puede ser interno o en el conector."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de conexión del jack."]
-    ],
-    "Auricular (inalámbrico / bluetooth) Funciona A veces": [
-      ["Auricular", "El auricular está dañado."],
-      ["SoftWare", "Problemas en software dañado o en mal funcionamiento. Se recomienda restablecimiento de configuración, formateo o flasheo."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de conexión de conectividad Bluetooth."]
-    ],
-    "Ingrese código de Desbloqueo al insertar SIM": [
-      ["Equipo Importado", "El equipo proviene fuera del país y no está liberado. Requiere Código de liberación."],
-      ["Equipo NO liberado", "Necesita liberación por código para utilizar SIMs de otras empresas."]
-    ],
-    "El Equipo tiene patrón, Clave de usuario o Cuenta de google": [
-      ["No se acuerda la contraseña", "En la cuenta de Google, activar la recuperación de cuenta a través de datos de usuario."],
-      ["Equipo cuestionable", "Equipo de procedencia ilegítima. Se recomienda rechazar."],
-      ["Software", "Se debe eliminar toda la información del equipo para eliminar con ella la contraseña. Formateo requerido. Es probable que la cuenta de Google (y su bloqueo FRP) se mantengan."]
-    ],
-    "el celular Calienta Junto a la batería": [
-      ["Batería", "Batería dañada o desgastada. Se recomienda cambio de batería."],
-      ["SoftWare", "Problemas en software dañado o en mal funcionamiento. Se recomienda formateo o Flasheo."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de encendido y funcionamiento."]
-    ],
-    "La pantalla hace rayas como de interferencia, lluvia o lineas de colores": [
-      ["Módulo de imagen", "Módulo dañado, mal conectado, sucio o faltante. Se recomienda cambio de módulo."],
-      ["Conectores", "Conectores FPC de placa o del módulo dañados, sucios o desconectados."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de imagen."]
-    ],
-    "Solo se escucha el sonido cuando lo acerco a la oreja": [
-      ["Parlantes", "Parlante altavoz dañado, mal conectado, sucio, desconectado o faltante. Se recomienda pruebas con otros parlantes."],
-      ["Conectores", "Conectores de presión de placa o del parlante dañados, sucios o desconectados."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de Audio."]
-    ],
-    "Solo se se escucha el sonido en altavoz (en llamada o en audios)": [
-      ["Parlantes", "Parlante auricular dañado, mal conectado, sucio, desconectado o faltante. Se recomienda pruebas con otros parlantes."],
-      ["Conectores", "Conectores de presión de placa o del parlante dañados, sucios o desconectados."],
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de Audio."]
-    ],
-    "Aparece un triángulo amarillo al encender o cargar (depende del ícono)": [
-      ["Sulfato / suciedad", "Daños o fallas producidos por presencia de sulfato o suciedad."],
-      ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de carga, encendido o termistores."]
-    ]
+      ]
     };
 
 function showResponse(falla) {
