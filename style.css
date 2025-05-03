@@ -30,7 +30,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  padding-top: 80px;
 }
 #appContent {
   flex: 1;
@@ -174,7 +173,7 @@ button:hover {
 
 /* Barra superior con email y logout */
 .top-bar {
-  position: absolute; /* Cambiar de fixed a absolute o relative si lo preferís */
+  position: fixed; /* Cambiar de fixed a absolute o relative si lo preferís */
   top: 10px;
   width: 100%;
   padding: 10px 20px;
@@ -403,8 +402,13 @@ body.light-mode .footer {
   user-select: none;
 }
 
-* {
-  outline: 1px solid red; /* solo para debug */
+#appContent {
+  padding-top: 60px; /* espacio para que no tape la top-bar fija */
 }
 
+
+/* * {
+  outline: 1px solid red; /* solo para debug */
+}
+*/
 
