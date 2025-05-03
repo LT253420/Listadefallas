@@ -403,6 +403,8 @@ body.light-mode .footer {
   user-select: none;
 }
 
-
+* {
+  outline: 1px solid red; /* solo para debug */
+}
 
 
