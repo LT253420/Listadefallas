@@ -370,4 +370,3 @@ function ocultarTodo() {
         }, 500);
       }
     }
-  </script>
