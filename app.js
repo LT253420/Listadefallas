@@ -42,27 +42,61 @@ window.login = () =>
 
 window.logout = () => signOut(auth);
 
-// ==================== Verificación de contraseña (2FA) ====================
+// ==================== 2º factor: verificación con feedback y redirección ====================
+// Timer global para no apilar redirecciones
+let redirectTimer = null;
+
 window.verifyPassword = async () => {
   const input = document.getElementById("pwdInput");
   const error = document.getElementById("pwdError");
   if (!input) return;
 
-  const typedHash = await sha256Hex((input.value || "").trim());
+  // Si había un temporizador previo, lo limpio
+  if (redirectTimer) {
+    clearInterval(redirectTimer.interval);
+    clearTimeout(redirectTimer.timeout);
+    redirectTimer = null;
+  }
+
+  const typed = input.value.trim();
+  const typedHash = await sha256Hex(typed);
 
   if (typedHash === PASSWORD_HASH) {
+    // OK → limpiar estados de error si los hubiera
+    input.classList.remove("error", "shake");
+    if (error) { error.style.display = "none"; error.textContent = ""; }
+
+    // Mostrar app
     setSecondFactorOk(true);
     hide("passwordGate");
     show("appContent", "flex");
-    document.getElementById("logoutBtn")?.style && (document.getElementById("logoutBtn").style.display = "inline-block");
+    show("logoutBtn", "inline-block");
   } else {
-    // animación de error + redirección a los 5s
-    input.classList.add("error","shake");
-    if (error) { error.style.display = "block"; error.textContent = "Contraseña incorrecta"; }
-    setTimeout(() => input.classList.remove("shake"), 600);
-    await signOut(auth);
-    setSecondFactorOk(false);
-    setTimeout(() => location.replace("https://www.google.com/"), 5000);
+    // Incorrecta → feedback visual + cuenta regresiva + redirección a los 5s
+    if (error) {
+      error.style.display = "block";
+      error.textContent = "❌ Contraseña incorrecta. Redirigiendo en 5…";
+    }
+    input.classList.add("error", "shake");
+    setTimeout(() => input.classList.remove("shake"), 400);
+
+    let seconds = 5;
+    redirectTimer = {
+      interval: setInterval(() => {
+        seconds -= 1;
+        if (error && seconds >= 0) {
+          error.textContent = `❌ Contraseña incorrecta. Redirigiendo en ${seconds}…`;
+        }
+        if (seconds <= 0) {
+          clearInterval(redirectTimer.interval);
+        }
+      }, 1000),
+      timeout: setTimeout(async () => {
+        setSecondFactorOk(false);
+        try { await signOut(auth); } catch (_) {}
+        location.replace("https://www.google.com/");
+      }, 5000)
+    };
   }
 };
 
