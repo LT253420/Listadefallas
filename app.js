@@ -1,4 +1,4 @@
-// ===== Firebase (ESM) =====
+// ==================== Firebase (ESM) ====================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
@@ -11,15 +11,15 @@ const firebaseConfig = {
   appId: "1:632649294661:web:9c6daa894931936c87142c"
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-// Exponer login/logout (ya lo tenías así, lo dejo igual)
-window.login  = () => signInWithPopup(auth, provider).catch(error => alert("Error al iniciar sesión: " + error.message));
+// ==================== Login / Logout (globales) ====================
+window.login  = () => signInWithPopup(auth, provider).catch(err => alert("Error al iniciar sesión: " + err.message));
 window.logout = () => signOut(auth);
 
-// ===== Auth state =====
+// ==================== Estado Auth ====================
 onAuthStateChanged(auth, user => {
   const loginContainer = document.getElementById("loginContainer");
   const appContent = document.getElementById("appContent");
@@ -27,23 +27,21 @@ onAuthStateChanged(auth, user => {
   const logoutBtn = document.getElementById("logoutBtn");
 
   if (user) {
-    if (loginContainer) loginContainer.style.display = "none";
-    if (appContent) {
-      appContent.style.display = "flex";
-      appContent.classList.add("hud-appear");
-    }
-    if (emailText) emailText.textContent = user.email || "";
-    if (logoutBtn) logoutBtn.style.display = "inline-block";
+    loginContainer.style.display = "none";
+    appContent.style.display = "flex";
+    appContent.classList.add("hud-appear");
+    emailText.textContent = user.email || "";
+    logoutBtn.style.display = "inline-block";
   } else {
-    if (loginContainer) loginContainer.style.display = "flex";
-    if (appContent) appContent.style.display = "none";
-    if (logoutBtn) logoutBtn.style.display = "none";
-    if (emailText) emailText.textContent = "";
+    loginContainer.style.display = "flex";
+    appContent.style.display = "none";
+    logoutBtn.style.display = "none";
+    emailText.textContent = "";
   }
 });
 
-// ===== Datos =====
-const respuestasPorFalla = {
+// ==================== Datos (hacerlos globales) ====================
+window.respuestasPorFalla = {
   "No enciende": [
     ["Revisar batería", "Medir batería para saber si funciona."],
     ["Botón de encendido", "Verificar si el botón funciona correctamente."],
@@ -242,22 +240,27 @@ const respuestasPorFalla = {
     ["Placa Madre", "Falla, cortocircuito o fuga en placa. Revisar Circuito de carga, encendido o termistores."]
   ]
 };
-// Si algún código HTML lee esto, lo tendrá disponible:
-window.respuestasPorFalla = respuestasPorFalla;
 
-// ===== UI =====
-function showResponse(falla) {
-  ocultarTodo();
+// ==================== UI helpers (globalizar) ====================
+window.ocultarTodo = () => {
+  ["mainMenu", "usoMenu", "fallasMenu", "respuestas", "contactoMenu"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
+  const resp = document.getElementById("respuestas");
+  if (resp) resp.innerHTML = "";
+};
+
+window.showResponse = (falla) => {
+  window.ocultarTodo();
   const respuestas = document.getElementById("respuestas");
-  if (!respuestas) return;
-
   respuestas.style.display = "flex";
   void respuestas.offsetWidth;
   respuestas.classList.add("hud-appear");
   respuestas.innerHTML = `<button onclick="volverA('fallas')">← Volver</button><h2>${falla}</h2>`;
 
-  if (respuestasPorFalla[falla]) {
-    respuestasPorFalla[falla].forEach(([titulo, descripcion]) => {
+  if (window.respuestasPorFalla[falla]) {
+    window.respuestasPorFalla[falla].forEach(([titulo, descripcion]) => {
       const btn = document.createElement("button");
       btn.textContent = titulo;
       btn.onclick = () => {
@@ -270,61 +273,47 @@ function showResponse(falla) {
       respuestas.appendChild(btn);
     });
   }
-}
+};
 
-function mostrarComoUsar() {
-  ocultarTodo();
+window.mostrarComoUsar = () => {
+  window.ocultarTodo();
   const uso = document.getElementById("usoMenu");
-  if (!uso) return;
   uso.style.display = "flex";
   requestAnimationFrame(() => uso.classList.add("hud-appear"));
-}
+};
 
-document.addEventListener("contextmenu", e => e.preventDefault());
-
-function mostrarFallas() {
-  ocultarTodo();
+window.mostrarFallas = () => {
+  window.ocultarTodo();
   const fallas = document.getElementById("fallasMenu");
-  if (!fallas) return;
   fallas.style.display = "flex";
   requestAnimationFrame(() => fallas.classList.add("hud-appear"));
-}
+};
 
-function mostrarContacto() {
-  ocultarTodo();
+window.mostrarContacto = () => {
+  window.ocultarTodo();
   const contacto = document.getElementById("contactoMenu");
-  if (!contacto) return;
   contacto.style.display = "flex";
   requestAnimationFrame(() => contacto.classList.add("hud-appear"));
-}
+};
 
-function volverA(seccion) {
-  ocultarTodo();
+window.volverA = (seccion) => {
+  window.ocultarTodo();
   const destino = seccion === "main" ? "mainMenu" : "fallasMenu";
   const menu = document.getElementById(destino);
-  if (!menu) return;
   menu.style.display = "flex";
   requestAnimationFrame(() => menu.classList.add("hud-appear"));
-}
+};
 
-function toggleTheme() {
+window.toggleTheme = () => {
   document.body.classList.toggle("light-mode");
-}
+};
 
-function goToHome() {
-  volverA("main");
-}
+window.goToHome = () => {
+  window.volverA("main");
+  document.getElementById("mainMenu").style.display = "flex";
+};
 
-// Hacerlas visibles para onclick del HTML
-window.showResponse = showResponse;
-window.mostrarComoUsar = mostrarComoUsar;
-window.mostrarFallas = mostrarFallas;
-window.mostrarContacto = mostrarContacto;
-window.volverA = volverA;
-window.toggleTheme = toggleTheme;
-window.goToHome = goToHome;
-
-// ===== Preloader =====
+// ==================== Preloader ====================
 const preloader = document.getElementById("preloader");
 const fill = document.getElementById("progressFill");
 const percentText = document.getElementById("percentage");
@@ -350,3 +339,6 @@ function updateProgress() {
     }, 500);
   }
 }
+
+// ==================== Restricciones ====================
+document.addEventListener('contextmenu', e => e.preventDefault());
