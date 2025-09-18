@@ -257,3 +257,29 @@ document.getElementById("pwdInput")?.addEventListener("input", () => {
     // y ante cambios
     ['input', 'change', 'animationstart'].forEach(ev => pwd.addEventListener(ev, mark));
   });
+
+// --- FIX Chrome: forzar estilo cuando el input llega autofill al cargar ---
+window.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('pwdInput');
+  if (!input) return;
+
+  // Pequeño delay para que Chrome aplique :-webkit-autofill internamente
+  setTimeout(() => {
+    try {
+      // En Chrome funciona matches(':-webkit-autofill')
+      if (input.matches(':-webkit-autofill')) {
+        input.classList.add('is-autofilled');
+
+        // Refresco inmediato del box-shadow para evitar que quede blanco
+        const glow = `0 0 10px var(--color-luz), 0 0 0 1000px var(--color-fondo-luz) inset`;
+        input.style.webkitBoxShadow = glow;
+        input.style.boxShadow = glow;
+        input.style.background = 'transparent';
+        input.style.borderColor = 'var(--color-principal)';
+      }
+    } catch (e) {
+      // Si algún navegador no soporta el pseudo, no pasa nada.
+    }
+  }, 60); // 50–100ms suele ser suficiente
+});
+
