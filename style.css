@@ -497,3 +497,16 @@ input.response-box::placeholder {
   text-align: center;
   opacity: .7;
 }
+
+/* Ajuste por si el autofill mete otra fuente/tamaño en la primera línea */
+input.response-box:-webkit-autofill::first-line {
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-principal);
+}
+
+/* Focus */
+input.response-box:focus {
+  border-color: var(--color-principal);
+  box-shadow: 0 0 20px var(--color-luz);
+  background: color-mix(in oklab, var(--color-principal) 7%, transparent);
