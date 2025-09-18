@@ -510,3 +510,13 @@ input.response-box:focus {
   font-family: inherit;
   color: var(--color-principal);
 }
+
+/* Estilo cuando detectamos autofill por JS */
+#passwordGate input.response-box.autofilled {
+  box-shadow:
+    0 0 10px var(--color-luz),
+    0 0 0 1000px var(--color-fondo-luz) inset !important;
+  background: var(--color-fondo-luz) !important;
+  border: 2px solid var(--color-principal) !important;
+  -webkit-text-fill-color: var(--color-principal) !important;
+}
