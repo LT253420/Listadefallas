@@ -483,14 +483,14 @@ input.response-box:focus {
   background: color-mix(in oklab, var(--color-principal) 7%, transparent);
 }
 
-/* Autofill de Chrome/Edge: forzamos nuestro fondo holográfico */
-#passwordGate input[type="password"].response-box:-webkit-autofill,
-#passwordGate input[type="password"].response-box:-webkit-autofill:hover,
-#passwordGate input[type="password"].response-box:-webkit-autofill:focus {
+/* === FIX Chrome/Edge Autofill para el input de contraseña === */
+#pwdInput.response-box:-webkit-autofill,
+#pwdInput.response-box:-webkit-autofill:hover,
+#pwdInput.response-box:-webkit-autofill:focus {
   -webkit-text-fill-color: var(--color-principal) !important;
-  border: 2px solid var(--color-principal) !important;
+  caret-color: var(--color-principal) !important;
 
-  /* Tapamos el amarillo del autofill con un inset gigante usando TU variable */
+  /* Pintamos el fondo que impone Chrome con un inset enorme */
   -webkit-box-shadow:
     0 0 10px var(--color-luz),
     0 0 0 1000px var(--color-fondo-luz) inset !important;
@@ -498,25 +498,10 @@ input.response-box:focus {
     0 0 10px var(--color-luz),
     0 0 0 1000px var(--color-fondo-luz) inset !important;
 
-  background-color: transparent !important;
-  caret-color: var(--color-principal) !important;
-  /* evita el “destello” del autofill al cargar */
+  border: 2px solid var(--color-principal) !important;
+  background: transparent !important;
+
+  /* Truco para que no “parpadee” el fondo del autofill */
   transition: background-color 9999s ease-out 0s;
 }
 
-/* Por si el autofill mete tipografía rara en la primera línea */
-#passwordGate input[type="password"].response-box:-webkit-autofill::first-line {
-  font-size: 1rem;
-  font-family: inherit;
-  color: var(--color-principal);
-}
-
-/* Estilo cuando detectamos autofill por JS */
-#passwordGate input.response-box.autofilled {
-  box-shadow:
-    0 0 10px var(--color-luz),
-    0 0 0 1000px var(--color-fondo-luz) inset !important;
-  background: var(--color-fondo-luz) !important;
-  border: 2px solid var(--color-principal) !important;
-  -webkit-text-fill-color: var(--color-principal) !important;
-}
