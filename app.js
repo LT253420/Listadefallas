@@ -15,6 +15,23 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
+// ==================== 2º factor: configuración ====================
+// Reemplazá este hash por el SHA-256 de TU contraseña.
+// Cómo obtenerlo (en la consola del navegador):
+//   await crypto.subtle.digest('SHA-256', new TextEncoder().encode('tu-contraseña'))
+//     .then(b=>Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join(''))
+const PASSWORD_HASH = "7a92c8be74878e8ee870f84cc90dcf431a4104dc2d93426a56eb96008699ff52";
+
+async function sha256Hex(text) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function show(elId, display = "flex") { const el = document.getElementById(elId); if (el) el.style.display = display; }
+function hide(elId) { const el = document.getElementById(elId); if (el) el.style.display = "none"; }
+function isSecondFactorOk() { return sessionStorage.getItem("secondFactorOk") === "1"; }
+function setSecondFactorOk(v) { sessionStorage.setItem("secondFactorOk", v ? "1" : "0"); }
+
+
 // ==================== Login / Logout (globales) ====================
 window.login  = () => signInWithPopup(auth, provider).catch(err => alert("Error al iniciar sesión: " + err.message));
 window.logout = () => signOut(auth);
@@ -341,4 +358,12 @@ function updateProgress() {
 }
 
 // ==================== Restricciones ====================
-document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener("contextmenu", event => event.preventDefault());
+
+// ==================== Limpieza de error al tipear (2FA) ====================
+document.getElementById("pwdInput")?.addEventListener("input", () => {
+  const input = document.getElementById("pwdInput");
+  const error = document.getElementById("pwdError");
+  input?.classList.remove("error", "shake");
+  if (error) { error.style.display = "none"; error.textContent = ""; }
+});
