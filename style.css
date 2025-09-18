@@ -505,3 +505,23 @@ input.response-box:focus {
   transition: background-color 9999s ease-out 0s;
 }
 
+/* Estado “autocompletado” forzado por JS */
+#pwdInput.response-box.is-autofilled {
+  -webkit-text-fill-color: var(--color-principal) !important;
+  caret-color: var(--color-principal) !important;
+
+  /* Pintamos el fondo del autofill con tu variable */
+  -webkit-box-shadow:
+    0 0 10px var(--color-luz),
+    0 0 0 1000px var(--color-fondo-luz) inset !important;
+  box-shadow:
+    0 0 10px var(--color-luz),
+    0 0 0 1000px var(--color-fondo-luz) inset !important;
+
+  border: 2px solid var(--color-principal) !important;
+  background: transparent !important;
+
+  /* Evita parpadeos */
+  transition: background-color 9999s ease-out 0s;
+}
+
