@@ -467,3 +467,18 @@ input.response-box.error {
   30%, 50%, 70% { transform: translateX(-8px); }
   40%, 60% { transform: translateX(8px); }
 }
+
+
+/* ------- FIX para Chrome/Edge (autofill) ------- */
+input.response-box:-webkit-autofill,
+input.response-box:-webkit-autofill:hover,
+input.response-box:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-principal) !important;
+  /* Cubrimos el fondo que impone Chrome con un inset grande */
+  -webkit-box-shadow: 0 0 0px 1000px color-mix(in oklab, var(--color-principal) 7%, transparent) inset !important;
+  box-shadow: 0 0 0px 1000px color-mix(in oklab, var(--color-principal) 7%, transparent) inset !important;
+  border: 2px solid var(--color-principal) !important;
+  caret-color: var(--color-principal) !important;
+  /* Truco para que no “parpadee” el fondo del autofill */
+  transition: background-color 9999s ease-out 0s;
+}
