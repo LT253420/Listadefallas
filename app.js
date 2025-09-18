@@ -238,3 +238,22 @@ document.getElementById("pwdInput")?.addEventListener("input", () => {
   input?.classList.remove("error", "shake");
   if (error) { error.style.display = "none"; error.textContent = ""; }
 });
+
+ // Aplica estilo de autofill si el campo viene precargado
+  window.addEventListener('DOMContentLoaded', () => {
+    const pwd = document.getElementById('pwdInput');
+    if (!pwd) return;
+
+    const mark = () => {
+      if (pwd.value && pwd.value.length > 0) {
+        pwd.classList.add('autofilled');
+      } else {
+        pwd.classList.remove('autofilled');
+      }
+    };
+
+    // chequeo inicial (Chrome a veces completa “después” del DOMContentLoaded)
+    setTimeout(mark, 100);
+    // y ante cambios
+    ['input', 'change', 'animationstart'].forEach(ev => pwd.addEventListener(ev, mark));
+  });
