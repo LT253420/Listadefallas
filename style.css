@@ -483,21 +483,29 @@ input.response-box:focus {
   background: color-mix(in oklab, var(--color-principal) 7%, transparent);
 }
 
-/* ------- Autofill Chrome/Edge en password ------- */
-input[type="password"].response-box:-webkit-autofill,
-input[type="password"].response-box:-webkit-autofill:hover,
-input[type="password"].response-box:-webkit-autofill:focus {
+/* Autofill de Chrome/Edge: forzamos nuestro fondo holográfico */
+#passwordGate input[type="password"].response-box:-webkit-autofill,
+#passwordGate input[type="password"].response-box:-webkit-autofill:hover,
+#passwordGate input[type="password"].response-box:-webkit-autofill:focus {
   -webkit-text-fill-color: var(--color-principal) !important;
   border: 2px solid var(--color-principal) !important;
-  /* Pintamos el fondo que impone Chrome con un inset gigante */
-  -webkit-box-shadow: 0 0 0 1000px rgba(0, 255, 0, 0.08) inset !important;
-  box-shadow: 0 0 0 1000px rgba(0, 255, 0, 0.08) inset !important;
+
+  /* Tapamos el amarillo del autofill con un inset gigante usando TU variable */
+  -webkit-box-shadow:
+    0 0 10px var(--color-luz),
+    0 0 0 1000px var(--color-fondo-luz) inset !important;
+  box-shadow:
+    0 0 10px var(--color-luz),
+    0 0 0 1000px var(--color-fondo-luz) inset !important;
+
+  background-color: transparent !important;
   caret-color: var(--color-principal) !important;
-  transition: background-color 9999s ease-out 0s; /* truco para que no “parpadee” */
+  /* evita el “destello” del autofill al cargar */
+  transition: background-color 9999s ease-out 0s;
 }
 
-/* Por si el autofill mete otra fuente/tamaño en la 1ª línea */
-input[type="password"].response-box:-webkit-autofill::first-line {
+/* Por si el autofill mete tipografía rara en la primera línea */
+#passwordGate input[type="password"].response-box:-webkit-autofill::first-line {
   font-size: 1rem;
   font-family: inherit;
   color: var(--color-principal);
