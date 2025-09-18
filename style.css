@@ -482,3 +482,18 @@ input.response-box:-webkit-autofill:focus {
   /* Truco para que no “parpadee” el fondo del autofill */
   transition: background-color 9999s ease-out 0s;
 }
+
+
+/* Ajuste por si el autofill mete otra fuente/tamaño en la primera línea */
+input.response-box:-webkit-autofill::first-line {
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-principal);
+}
+
+/* Placeholder */
+input.response-box::placeholder {
+  color: var(--color-principal);
+  text-align: center;
+  opacity: .7;
+}
