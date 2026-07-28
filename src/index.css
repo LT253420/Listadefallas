@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   NOVACELL - SISTEMA DE DIAGNOSTICO
+   Todos los estilos en un solo archivo para facilidad de edicion
+   ============================================================ */
+
+/* ==================== VARIABLES CSS ==================== */
+:root {
+  /* Colores principales - Verde LED electronico */
+  --color-primary: #09ff00e3;
+  --color-primary-light: #4bff33;
+  --color-primary-dark: #11cc00;
+  --color-primary-glow: rgba(0, 255, 13, 0.4);
+  --color-primary-subtle: rgba(9, 255, 0, 0.123);
+  --color-primary-luz: rgba(9, 255, 0, 0.466);
+  --color-primary-glow-mid: rgba(0, 255, 0, 0.205);
+
+  /* Colores de estado */
+  --color-warning: #ffaa00;
+  --color-error: #ff4444;
+  --color-info: #00aaff;
+  --color-success: #00ff68;
+
+  /* Fondos */
+  --bg-base: #0a0a0a;
+  --bg-surface: #111111;
+  --bg-elevated: #1a1a1a;
+
+  /* Texto */
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-muted: #606060;
+  --text-tertiary: #404040;
+
+  /* Bordes */
+  --border-color: rgba(60, 255, 0, 0.25);
+  --border-color-hover: rgba(0, 255, 13, 0.5);
+
+  /* Sombras */
+  --shadow-glow: 0 0 20px rgba(0, 255, 0, 0.3);
+  --shadow-glow-strong: 0 0 30px rgba(0, 255, 34, 0.5);
+
+  /* Tipografia */
+  --font-mono: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Transiciones */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==================== MODO CLARO ==================== */
+.light-mode {
+  --bg-base: #f5f5f5;
+  --bg-surface: #ffffff;
+  --bg-elevated: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #505050;
+  --text-muted: #808080;
+  --text-tertiary: #a0a0a0;
+  --border-color: rgba(0, 180, 24, 0.3);
+  --border-color-hover: rgba(0, 180, 9, 0.6);
+  --color-primary: #00b00f;
+  --color-primary-glow: rgba(0, 176, 9, 0.3);
+  --color-primary-subtle: rgba(15, 176, 0, 0.1);
+}
+
+/* ==================== ESTILOS BASE ==================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Fondo con patron de circuito */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(30, 255, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 0, 0.02) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(51, 255, 0, 0.08) 0%, transparent 60%);
+  background-size: 40px 40px, 40px 40px, 100% 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* ==================== TIPOGRAFIA ==================== */
+h1, h2, h3, h4 {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+}
+
+h1 { font-size: 2rem; text-shadow: 0 0 20px var(--color-primary-glow); text-shadow: 0 0 8px var(--color-primary); }
+h2 { font-size: 1.5rem; text-shadow: 0 0 15px var(--color-primary-glow); text-shadow: 0 0 8px var(--color-primary) }
+h3 { font-size: 1.25rem;text-shadow: 0 0 8px var(--color-primary) }
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ==================== ANIMACIONES ==================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hudAppear {
+  0% { opacity: 0; transform: scale(0.96); filter: blur(4px); }
+  50% { opacity: 0.8; transform: scale(1.01); filter: blur(2px); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 42, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(9, 255, 0, 0.5); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* Clases de animacion */
+.animate-fadeIn { animation: fadeIn 0.25s var(--ease-out) forwards; }
+.animate-fadeInUp { animation: fadeInUp 0.4s var(--ease-out) forwards; }
+.animate-hudAppear { animation: hudAppear 0.5s var(--ease-out) forwards; }
+.animate-pulseGlow { animation: pulseGlow 2s ease-in-out infinite; }
+.animate-shake { animation: shake 0.4s ease-in-out; }
+.animate-shimmer { animation: shimmer 1.5s ease-in-out infinite; }
+
+/* Stagger delays */
+.stagger-1 { animation-delay: 50ms; }
+.stagger-2 { animation-delay: 100ms; }
+.stagger-3 { animation-delay: 150ms; }
+.stagger-4 { animation-delay: 200ms; }
+.stagger-5 { animation-delay: 250ms; }
+.stagger-6 { animation-delay: 300ms; }
+.stagger-7 { animation-delay: 350ms; }
+.stagger-8 { animation-delay: 400ms; }
+
+/* ==================== SCROLLBAR ==================== */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-color-hover); }
+
+/* ==================== SELECCION ==================== */
+::selection { background: var(--color-primary-subtle); color: var(--color-primary); }
+::-moz-selection { background: var(--color-primary-subtle); color: var(--color-primary); }
+
+/* ==================== FOCUS ==================== */
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+button:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-glow);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 640px) {
+  html { font-size: 14px; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+}
